@@ -433,13 +433,8 @@ const ImageModalList = ({ images }) => map(ImageModal, images)
 const Layout = ({ children }) => (
   <React.Fragment>
     <div className="title">
-      <h1>React modal animation</h1>
-      <a href="https://odintsov.me" target="_blank">
-        <img src="https://maxcdn.icons8.com/Android_L/PNG/24/Messaging/link-24.png" alt="Twitter icon"/>
-      </a><span>&nbsp;&nbsp; / &nbsp;&nbsp;</span>
-      <a href="https://twitter.com/odintsov_design" target="_blank">
-        <img src="https://g.twimg.com/dev/documentation/image/Twitter_logo_blue_32.png" alt="Twitter icon"/>
-      </a>
+      <h1>ReactJS Book Library</h1>
+      
     </div>
     {children}
     <div className="credits">Created with <span className="love"></span> by <a href="https://github.com/ElishaKay?tab=repositories">Elisha Kramer</a></div>
