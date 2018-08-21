@@ -27,7 +27,9 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-stage-1": "^6.1.18",
+    "lodash": "^4.17.10",
     "ramda": "^0.25.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
