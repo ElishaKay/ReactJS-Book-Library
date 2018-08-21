@@ -10,12 +10,13 @@ export const fetchBooks = () => async dispatch => {
   let id = 0;
   console.log(res);
   for(let i=0; i<6; i++){
+    let book = res.data.items[i].volumeInfo;
     books[i] = {id: id++,
-                title: res.data.items[i].volumeInfo.title,
-                author: res.data.items[i].volumeInfo.authors[0], 
-                img: res.data.items[i].volumeInfo.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
-                published: res.data.items[i].volumeInfo.publishedDate,
-                text: res.data.items[i].volumeInfo.description}
+                title: book.title,
+                author: book.authors[0], 
+                img: book.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
+                published: book.publishedDate,
+                text: book.description}
   }
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
