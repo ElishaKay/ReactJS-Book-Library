@@ -10,43 +10,10 @@ import { cloneChildren, Head, Content, easingFunctions, getElapsedTime, calcProg
 import images from '../Modal/images'
 import Modal from '../Modal/Modal'
 import ImageHead from '../Modal/ImageHead'
-
-
-const ImageContent = ({ title, text }) => (
-  <div className='image-content'>
-    <h3>{title}</h3>
-    <p>{text}</p>
-  </div>
-)
-
-const ImageModal = item => (
-  <div key={item.id} className='grid__item'>
-    <Modal
-      maxwidth={700}
-      maxheight={500}
-      ms={500}
-    >
-      <Modal.Head>
-        <ImageHead {...item}/>
-      </Modal.Head>
-      <Modal.Content>
-        <ImageContent {...item}/>
-      </Modal.Content>
-    </Modal>
-  </div>
-)
-
-const ImageModalList = ({ images }) => map(ImageModal, images)
-
-const Layout = ({ children }) => (
-  <React.Fragment>
-    <div className="title">
-      <h1>ReactJS Book Library</h1>
-    </div>
-    {children}
-    <div className="credits">Created with <span className="love"></span> by <a href="https://github.com/ElishaKay?tab=repositories">Elisha Kramer</a></div>
-  </React.Fragment>
-)
+import ImageContent from '../Modal/ImageContent'
+import ImageModal from '../Modal/ImageModal'
+import ImageModalList from '../Modal/ImageModalList'
+import Layout from '../Modal/Layout'
 
 
 class BooksIndex extends Component {
