@@ -13,3 +13,4 @@ export default ({ title, img, modal: { isOpen, original, close } }) => (
     </div>
   </div>
 )
+
