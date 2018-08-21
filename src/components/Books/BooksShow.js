@@ -42,6 +42,7 @@ class BooksShow extends Component {
 }
 
 function mapStateToProps({ books }, ownProps) {
+  console.log('books[ownProps.match.params.id]',books[ownProps.match.params.id]);
   return { book: books[ownProps.match.params.id] };
 }
 
