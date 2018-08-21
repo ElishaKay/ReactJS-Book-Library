@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchBook, deleteBook } from "../../actions";
-import {Head, Content} from "../../helpers/modalStyling";
+import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
+import { cloneChildren, Head, Content, easingFunctions, getElapsedTime, calcProgressVal, callFn, getNewStyles, setStyleToElement, setStylesToElement, pickFromRect, _findChildren, findChildrenOr, findChildren, findChildrenOrIdentity, getLastPositionStyles, states, openState, afterOpenState, closingState, isActiveState, isAfterOpenState, isClosingState, isOpenedState } from "../../helpers/modalStyling";
 
-class Modal extends React.Component {
+
+export default class Modal extends Component {
   static Head = Head
   static Content = Content
 
@@ -245,9 +244,3 @@ class Modal extends React.Component {
     )
   }
 }
-
-function mapStateToProps({ books }, ownProps) {
-  return { book: books[ownProps.match.params.id] };
-}
-
-export default connect(mapStateToProps, { fetchBook, deleteBook })(Modal);
