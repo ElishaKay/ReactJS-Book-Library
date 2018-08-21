@@ -21,6 +21,11 @@ export const fetchBooks = () => async dispatch => {
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
+export const updateBook = id => async dispatch => {
+
+  dispatch({ type: CREATE_BOOK, payload: res.data });
+}
+
 export const createBook = (values, callback) => async dispatch => {
   const res = await axios.post(`${ROOT_URL}/books${API_KEY}`, values);
   callback();
