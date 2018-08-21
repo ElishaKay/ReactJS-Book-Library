@@ -8,10 +8,6 @@ import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find
 import { cloneChildren, Head, Content, easingFunctions, getElapsedTime, calcProgressVal, callFn, getNewStyles, setStyleToElement, setStylesToElement, pickFromRect, _findChildren, findChildrenOr, findChildren, findChildrenOrIdentity, getLastPositionStyles, states, openState, afterOpenState, closingState, isActiveState, isAfterOpenState, isClosingState, isOpenedState } from "../../helpers/modalStyling";
 
 import images from '../Modal/images'
-import Modal from '../Modal/Modal'
-import ImageHead from '../Modal/ImageHead'
-import ImageContent from '../Modal/ImageContent'
-import ImageModal from '../Modal/ImageModal'
 import ImageModalList from '../Modal/ImageModalList'
 import Layout from '../Modal/Layout'
 

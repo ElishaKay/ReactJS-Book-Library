@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchBook, deleteBook } from "../../actions";
+import {Head, Content} from "../../helpers/modalStyling";
 
 class Modal extends React.Component {
   static Head = Head
