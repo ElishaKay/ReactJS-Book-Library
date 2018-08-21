@@ -18,8 +18,8 @@ export const fetchPosts = () => async dispatch => {
                 title: res.data.items[i].volumeInfo.title,
                 author: res.data.items[i].volumeInfo.authors[0]}
   }
-  console.log('books object:', books)
-  dispatch({ type: FETCH_POSTS, payload: res.data });
+  console.log(books)
+  dispatch({ type: FETCH_POSTS, payload: books });
 }
 
 export const createPost = (values, callback) => async dispatch => {
