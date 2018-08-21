@@ -1,16 +1,25 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_SURVEYS, FETCH_POSTS, FETCH_POST,
+import { FETCH_USER, FETCH_SURVEYS, FETCH_BOOKS, FETCH_POST,
         CREATE_POST, DELETE_POST } from './types';
 
 // External API For Creating and deleting Posts
-const ROOT_URL = "http://reduxblog.herokuapp.com/api";
-const API_KEY = "?key=PAPERCLIP1234";
+const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=harry";
 
-export const fetchPosts = () => async dispatch => {
-  const res = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-  console.log('these are the posts:', res)
 
-  dispatch({ type: FETCH_POSTS, payload: res.data });
+export const fetchBooks = () => async dispatch => {
+  const res = await axios.get(`${ROOT_URL}`);
+  console.log('these are the books:', res.data)
+
+  let books = {};
+  let id = 0;
+
+  for(let i=0; i<10; i++){
+    books[i] = {id: id++,
+                title: res.data.items[i].volumeInfo.title,
+                author: res.data.items[i].volumeInfo.authors[0]}
+  }
+  console.log(books)
+  dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
 export const createPost = (values, callback) => async dispatch => {
