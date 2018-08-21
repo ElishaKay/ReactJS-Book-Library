@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPost, deletePost } from "../../actions";
+import { fetchBook, deleteBook } from "../../actions";
 
-class PostsShow extends Component {
+class BooksShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.fetchPost(id);
+    this.props.fetchBook(id);
   }
 
   onDeleteClick() {
     const { id } = this.props.match.params;
 
-    this.props.deletePost(id, () => {
+    this.props.deleteBook(id, () => {
       this.props.history.push("/");
     });
   }
 
   render() {
-    const { post } = this.props;
+    const { book } = this.props;
 
-    if (!post) {
+    if (!book) {
       return <div>Loading...</div>;
     }
 
@@ -31,18 +31,18 @@ class PostsShow extends Component {
           className="btn btn-danger pull-xs-right"
           onClick={this.onDeleteClick.bind(this)}
         >
-          Delete Post
+          Delete Book
         </button>
-        <h3>{post.title}</h3>
-        <h6>Categories: {post.categories}</h6>
-        <p>{post.content}</p>
+        <h3>{book.title}</h3>
+        <h6>Categories: {book.categories}</h6>
+        <p>{book.content}</p>
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }, ownProps) {
-  return { post: posts[ownProps.match.params.id] };
+function mapStateToProps({ books }, ownProps) {
+  return { book: books[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow);
+export default connect(mapStateToProps, { fetchBook, deleteBook })(BooksShow);
