@@ -8,7 +8,6 @@ export const fetchBooks = () => async dispatch => {
 
   let books = {};
   let id = 0;
-  console.log(res);
   for(let i=0; i<9; i++){
     let book = res.data.items[i].volumeInfo;
     books[i] = {id: id++,

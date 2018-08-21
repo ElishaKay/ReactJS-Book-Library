@@ -30,7 +30,7 @@ class ImageContent extends Component {
     }
 
     return (
-      <BooksNew />
+      <BooksNew book={this.props} />
     );
   }
 

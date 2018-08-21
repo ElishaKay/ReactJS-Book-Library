@@ -5,10 +5,13 @@ import { connect } from "react-redux";
 import { updateBook } from "../../actions";
 
 class BooksNew extends Component {
-  componentWillMount(){
-    console.log('this.props in booksNew Component:',this.props)
+  componentWillMount () {
+    this.props.initialize({ title: this.props.book.title, content: this.props.book.text });
+    console.log('this.props.book in booksNew Component:', this.props.book)
+    this.theBook = this.props.book;
   }
 
+  
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -36,6 +39,7 @@ class BooksNew extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
+          value={this.props.book.title}
           label="Title For Book"
           name="title"
           component={this.renderField}
@@ -78,6 +82,8 @@ function validate(values) {
 }
 
 export default reduxForm({
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm"
 })(connect(null, { updateBook })(BooksNew));
