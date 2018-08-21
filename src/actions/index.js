@@ -17,15 +17,16 @@ export const fetchBooks = () => async dispatch => {
                 img: book.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
                 published: book.publishedDate,
                 text: book.description,
-                udpateBook: true
+                udpateBook: false
               }
   }
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
-export const updateBook = id => async dispatch => {
-
-  dispatch({ type: CREATE_BOOK, payload: res.data });
+export const updateBook = (values, callback) => async dispatch => {
+  console.log('these are the updateBook values',values);
+  callback();
+  dispatch({ type: UPDATE_BOOK, payload: res.data });
 }
 
 export const createBook = (values, callback) => async dispatch => {

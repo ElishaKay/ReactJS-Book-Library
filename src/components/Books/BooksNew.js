@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createBook } from "../../actions";
+import { updateBook } from "../../actions";
 
 class BooksNew extends Component {
+  componentWillMount(){
+    console.log('this.props in booksNew Component:',this.props)
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -21,7 +25,7 @@ class BooksNew extends Component {
   }
 
   onSubmit(values) {
-    this.props.createBook(values, () => {
+    this.props.updateBook(values, () => {
       this.props.history.push("/");
     });
   }
@@ -76,4 +80,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "BooksNewForm"
-})(connect(null, { createBook })(BooksNew));
+})(connect(null, { updateBook })(BooksNew));
