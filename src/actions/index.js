@@ -3,8 +3,8 @@ import { FETCH_USER, FETCH_SURVEYS, FETCH_POSTS, FETCH_POST,
         CREATE_POST, DELETE_POST } from './types';
 
 // External API For Creating and deleting Posts
-const ROOT_URL = "http://reduxblog.herokuapp.com/api";
-const API_KEY = "?key=PAPERCLIP1234";
+const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=harry";
+
 
 export const fetchPosts = () => async dispatch => {
   const res = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
