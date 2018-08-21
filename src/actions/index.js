@@ -16,7 +16,9 @@ export const fetchBooks = () => async dispatch => {
                 author: book.authors[0], 
                 img: book.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
                 published: book.publishedDate,
-                text: book.description}
+                text: book.description,
+                udpateBook: true
+              }
   }
   dispatch({ type: FETCH_BOOKS, payload: books });
 }

@@ -1,30 +1,27 @@
-import React from 'react';
+import React, { Component } from "react";
 import BooksNew from "../Books/BooksNew";
 
-class ShowBook extends Component {
-  console.log(this.props);
-  state = { udpateBook: false };
-  { title, text, published, author } = this.props;
+class ImageContent extends Component {
+  componentWillMount() {
+    console.log('this.props in ImageContent Component',this.props);
+  }
 
   renderContent() {
-    if (this.state.udpateBook) {
+    if (this.props) {
       return (
-        <BooksNew
-          onCancel={() => this.setState({ udpateBook: false })}
-        />
+        <BooksNew />
       );
     }
 
     return (
       <div className='image-content'>
-	    <h3>{title}</h3>
-	    <h6>Author: {author}</h6>
-	    <h6>Published: {published}</h6>
-	    <p>{text}</p>
+	    <h3>{this.props.title}</h3>
+	    <h6>Author: {this.props.author}</h6>
+	    <h6>Published: {this.props.published}</h6>
+	    <p>{this.props.text}</p>
 
 	    <button 
 	    	className="btn btn-info pull-xs-right"
-	    	onClick={this.setState({ udpateBook: true }}
 	    >
 	        Edit Book
 	    </button>
@@ -39,38 +36,7 @@ class ShowBook extends Component {
 	     </div>
     );
   }
+};
 
 
-  
-
-
-
-export default 
-
--------------------
-
-
-      return (
-        <SurveyFormReview
-          onCancel={() => this.setState({ showFormReview: false })}
-        />
-      );
-    }
-
-    return (
-      <SurveyForm
-        onSurveySubmit={() => this.setState({ showFormReview: true })}
-      />
-    );
-  }
-
-  render() {
-    return (
-     
-    );
-  }
-}
-
-export default reduxForm({
-  form: 'surveyForm'
-})(SurveyNew);
+export default ImageContent;
