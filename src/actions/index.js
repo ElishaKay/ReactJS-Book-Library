@@ -7,7 +7,7 @@ const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=harry";
 
 
 export const fetchPosts = () => async dispatch => {
-  const res = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+  const res = await axios.get(`${ROOT_URL}`);
   console.log('these are the posts:', res)
 
   dispatch({ type: FETCH_POSTS, payload: res.data });

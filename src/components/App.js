@@ -442,7 +442,7 @@ const Layout = ({ children }) => (
       </a>
     </div>
     {children}
-    <div className="credits">Created with <span className="love"></span> by <a href="https://codepen.io/ivanodintsov">Ivan Odintsov</a></div>
+    <div className="credits">Created with <span className="love"></span> by <a href="https://github.com/ElishaKay?tab=repositories">Elisha Kramer</a></div>
   </React.Fragment>
 )
 
