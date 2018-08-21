@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createBook } from "../../actions";
+import { updateBook } from "../../actions";
 
 class BooksNew extends Component {
+  componentWillMount () {
+    this.props.initialize({ title: this.props.book.title, content: this.props.book.text });
+    console.log('this.props.book in booksNew Component:', this.props.book)
+    this.theBook = this.props.book;
+  }
+
+  
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -21,7 +28,7 @@ class BooksNew extends Component {
   }
 
   onSubmit(values) {
-    this.props.createBook(values, () => {
+    this.props.updateBook(values, () => {
       this.props.history.push("/");
     });
   }
@@ -32,6 +39,7 @@ class BooksNew extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
+          value={this.props.book.title}
           label="Title For Book"
           name="title"
           component={this.renderField}
@@ -74,6 +82,8 @@ function validate(values) {
 }
 
 export default reduxForm({
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm"
-})(connect(null, { createBook })(BooksNew));
+})(connect(null, { updateBook })(BooksNew));
