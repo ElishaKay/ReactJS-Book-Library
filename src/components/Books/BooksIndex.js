@@ -7,23 +7,10 @@ import { fetchBooks } from "../../actions";
 import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
 import { cloneChildren, Head, Content, easingFunctions, getElapsedTime, calcProgressVal, callFn, getNewStyles, setStyleToElement, setStylesToElement, pickFromRect, _findChildren, findChildrenOr, findChildren, findChildrenOrIdentity, getLastPositionStyles, states, openState, afterOpenState, closingState, isActiveState, isAfterOpenState, isClosingState, isOpenedState } from "../../helpers/modalStyling";
 
-import Modal from '../Modal/Modal'
 import images from '../Modal/images'
+import Modal from '../Modal/Modal'
+import ImageHead from '../Modal/ImageHead'
 
-
-const ImageHead = ({ title, bg, modal: { isOpen, original, close } }) => (
-  <div className={`image ${isOpen & original ? 'image--active' : ''}`} style={{ }}>
-    <div className='image__bg' style={{ backgroundImage: `url(${bg})` }}/>
-    <div className='image__content'>
-      {
-        isOpen & original
-          ? <button className='image__close' onClick={close}>&#10006;</button>
-          : null
-      }
-      <h2>{title}</h2>
-    </div>
-  </div>
-)
 
 const ImageContent = ({ title, text }) => (
   <div className='image-content'>
