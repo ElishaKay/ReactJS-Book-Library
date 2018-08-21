@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { Component } from "react";
+import BooksNew from "../Books/BooksNew";
 
-export default ({ title, text, published, author }) => (
-  <div className='image-content'>
-    <h3>{title}</h3>
-    <h6>Author: {author}</h6>
-    <h6>Published: {published}</h6>
-    <p>{text}</p>
+class ImageContent extends Component {
+  componentWillMount() {
+    console.log('this.props in ImageContent Component',this.props);
+  }
 
-    <button 
-    	className="btn btn-info pull-xs-right"
-    	// onClick={this.onDeleteClick.bind(this)}
-    >
-        Edit Book
-    </button>
-  </div>
-)
+  renderContent() {
+    if (this.props) {
+      return (
+        <BooksNew />
+      );
+    }
+
+    return (
+      <div className='image-content'>
+	    <h3>{this.props.title}</h3>
+	    <h6>Author: {this.props.author}</h6>
+	    <h6>Published: {this.props.published}</h6>
+	    <p>{this.props.text}</p>
+
+	    <button 
+	    	className="btn btn-info pull-xs-right"
+	    >
+	        Edit Book
+	    </button>
+	  </div>
+    );
+  }
+
+  render() {
+    return (
+    	 <div>
+	        {this.renderContent()}
+	     </div>
+    );
+  }
+};
+
+
+export default ImageContent;
