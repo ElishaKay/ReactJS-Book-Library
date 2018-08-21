@@ -453,10 +453,9 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-              <Header />
-              <Route exact path="/" component={PostsIndex} />
-              <Route path="/posts/new" component={PostsNew} />
-              <Route path="/posts/:id" component={PostsShow} />
+             <Route exact path="/" component={PostsIndex} />
+             <Route path="/posts/new" component={PostsNew} />
+             <Route path="/posts/:id" component={PostsShow} />
           </div>
         </BrowserRouter>
         <Layout>
