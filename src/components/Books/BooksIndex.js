@@ -10,6 +10,7 @@ class BooksIndex extends Component {
   }
 
   renderBooks() {
+    console.log(this.props.books);
     return _.map(this.props.books, book => {
       return (
         <li className="list-group-item" key={book.id}>

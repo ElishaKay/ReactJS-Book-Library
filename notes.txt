@@ -1,0 +1,10 @@
+
+    books[i] = {id: id++,
+                title: res.data.items[i].volumeInfo.title,
+                author: res.data.items[i].volumeInfo.authors[0],
+   img: 
+            res.data.items[i].volumeInfo.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
+                published: res.data.items[i].volumeInfo.imageLinks.publishedDate}
+  }
+
+  +OR+ISBN:1455572160

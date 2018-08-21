@@ -19,7 +19,7 @@ class BooksShow extends Component {
 
   render() {
     const { book } = this.props;
-
+    console.log('heres the book object in bookShow Component:',book);
     if (!book) {
       return <div>Loading...</div>;
     }

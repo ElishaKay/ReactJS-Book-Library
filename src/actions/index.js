@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_BOOKS, FETCH_BOOK, CREATE_BOOK, DELETE_BOOK } from './types';
 
-const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=harry";
+const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=computers";
 
 export const fetchBooks = () => async dispatch => {
   const res = await axios.get(`${ROOT_URL}`);
@@ -9,10 +9,12 @@ export const fetchBooks = () => async dispatch => {
   let books = {};
   let id = 0;
 
-  for(let i=0; i<10; i++){
+  for(let i=0; i<6; i++){
     books[i] = {id: id++,
                 title: res.data.items[i].volumeInfo.title,
-                author: res.data.items[i].volumeInfo.authors[0]}
+                author: res.data.items[i].volumeInfo.authors[0], 
+                img: res.data.items[i].volumeInfo.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
+                published: res.data.items[i].volumeInfo.imageLinks.publishedDate}
   }
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
