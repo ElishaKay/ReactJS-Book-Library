@@ -4,17 +4,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchBooks } from "../../actions";
 
-class PostsIndex extends Component {
+class BooksIndex extends Component {
   componentDidMount() {
     this.props.fetchBooks();
   }
 
-  renderPosts() {
-    return _.map(this.props.posts, post => {
+  renderBooks() {
+    return _.map(this.props.books, book => {
       return (
-        <li className="list-group-item" key={post.id}>
-          <Link to={`/posts/${post.id}`}>
-            {post.title}
+        <li className="list-group-item" key={book.id}>
+          <Link to={`/books/${book.id}`}>
+            {book.title}
           </Link>
         </li>
       );
@@ -25,13 +25,13 @@ class PostsIndex extends Component {
     return (
       <div>
         <div className="text-xs-right">
-          <Link className="btn btn-primary" to="/posts/new">
-            Add a Post
+          <Link className="btn btn-primary" to="/books/new">
+            Add a Book
           </Link>
         </div>
-        <h3>Posts</h3>
+        <h3>Books</h3>
         <ul className="list-group">
-          {this.renderPosts()}
+          {this.renderBooks()}
         </ul>
       </div>
     );
@@ -39,7 +39,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { books: state.books };
 }
 
-export default connect(mapStateToProps, { fetchBooks })(PostsIndex);
+export default connect(mapStateToProps, { fetchBooks })(BooksIndex);

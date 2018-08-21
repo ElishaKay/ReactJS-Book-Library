@@ -1,14 +1,10 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_SURVEYS, FETCH_BOOKS, FETCH_POST,
-        CREATE_POST, DELETE_POST } from './types';
+import { FETCH_BOOKS, FETCH_BOOK, CREATE_BOOK, DELETE_BOOK } from './types';
 
-// External API For Creating and deleting Posts
 const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=harry";
-
 
 export const fetchBooks = () => async dispatch => {
   const res = await axios.get(`${ROOT_URL}`);
-  console.log('these are the books:', res.data)
 
   let books = {};
   let id = 0;
@@ -18,26 +14,25 @@ export const fetchBooks = () => async dispatch => {
                 title: res.data.items[i].volumeInfo.title,
                 author: res.data.items[i].volumeInfo.authors[0]}
   }
-  console.log(books)
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
-export const createPost = (values, callback) => async dispatch => {
-  const res = await axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+export const createBook = (values, callback) => async dispatch => {
+  const res = await axios.post(`${ROOT_URL}/books${API_KEY}`, values);
   callback();
 
-  dispatch({ type: CREATE_POST, payload: res.data });
+  dispatch({ type: CREATE_BOOK, payload: res.data });
 }
 
-export const fetchPost = id => async dispatch => {
-  const res = await axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
+export const fetchBook = id => async dispatch => {
+  const res = await axios.get(`${ROOT_URL}/books/${id}${API_KEY}`);
 
-  dispatch({ type: FETCH_POST, payload: res.data });
+  dispatch({ type: FETCH_BOOK, payload: res.data });
 }
 
-export const deletePost = (id, callback) => async dispatch => {
-  const res = await axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+export const deleteBook = (id, callback) => async dispatch => {
+  const res = await axios.delete(`${ROOT_URL}/books/${id}${API_KEY}`)
   callback();
 
-  dispatch({ type: DELETE_POST, payload: id });
+  dispatch({ type: DELETE_BOOK, payload: id });
 }

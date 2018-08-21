@@ -1,11 +1,11 @@
 import _ from "lodash";
-import { FETCH_BOOKS, FETCH_POST, DELETE_POST } from "../actions/types";
+import { FETCH_BOOKS, FETCH_BOOK, DELETE_BOOK } from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {
-    case DELETE_POST:
+    case DELETE_BOOK:
       return _.omit(state, action.payload);
-    case FETCH_POST:
+    case FETCH_BOOK:
       return { ...state, [action.payload.id]: action.payload };
     case FETCH_BOOKS:
       return action.payload;
