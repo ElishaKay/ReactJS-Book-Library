@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
 
-const { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } = R
 const cloneChildren = (children, props) => React.Children.map(children, child => <child.type {...child.props} {...props} />)
 const Head = ({ children, ...props }) => cloneChildren(children, props)
 const Content = ({ children, ...props }) => cloneChildren(children, props)
