@@ -34,14 +34,14 @@ const callFn = (fn, ...args) => is(Function, fn) && fn(...args)
 const getNewStyles = ({
   el: [ el1, el2 ],
   progress,
-  timingFunction
+  timingfunction
 }) => {
-  const progressFn = easingFunctions[timingFunction](progress)
+  const progressFn = easingFunctions[timingfunction](progress)
   const x = calcProgressVal(el1.x, el2.x, progressFn)
   const y = calcProgressVal(el1.y, el2.y, progressFn)
 
   return {
-    maxWidth: calcProgressVal(el1.width, el2.width, progressFn),
+    maxwidth: calcProgressVal(el1.width, el2.width, progressFn),
     height: calcProgressVal(el1.height, el2.height, progressFn),
     transform: `translate3d(${x}px, ${y}px, 0)`
   }
@@ -73,9 +73,9 @@ const findChildrenOr = curry((val, component, children) =>
 const findChildren = findChildrenOr(F)
 const findChildrenOrIdentity = findChildrenOr(identity)
 
-const getLastPositionStyles = ({ maxWidth, maxHeight }) => {
-  const mW = maxWidth > window.innerWidth ? window.innerWidth : maxWidth
-  const mH = maxHeight > window.innerHeight ? window.innerHeight : maxHeight
+const getLastPositionStyles = ({ maxwidth, maxheight }) => {
+  const mW = maxwidth > window.innerWidth ? window.innerWidth : maxwidth
+  const mH = maxheight > window.innerHeight ? window.innerHeight : maxheight
 
   return{
     width: mW,
@@ -106,7 +106,7 @@ class Modal extends React.Component {
   static Content = Content
 
   static defaultProps = {
-    timingFunction: 'easeInOutCubic'
+    timingfunction: 'easeInOutCubic'
   }
 
   state = {
@@ -138,7 +138,7 @@ class Modal extends React.Component {
     const newStyles = getNewStyles({
       el: [ from, to ],
       progress,
-      timingFunction: this.props.timingFunction
+      timingfunction: this.props.timingfunction
     })
 
     if (progress < 1) {
@@ -159,7 +159,7 @@ class Modal extends React.Component {
   processCallback({ styles, newStyles }) {
     setStylesToElement({
       ...newStyles,
-      'max-width': `${newStyles.maxWidth}px`,
+      'max-width': `${newStyles.maxwidth}px`,
       height: `${newStyles.height}px`
     }, this.content.current)
 
@@ -222,7 +222,7 @@ class Modal extends React.Component {
     const rect = pickFromRect(this.content.current.getBoundingClientRect())
 
     const styles = {
-      maxWidth: rect.width,
+      maxwidth: rect.width,
       height: rect.height,
       top: 0,
       left: 0,
@@ -406,8 +406,8 @@ const ImageContent = ({ title, text }) => (
 const ImageModal = item => (
   <div key={item.id} className='grid__item'>
     <Modal
-      maxWidth={700}
-      maxHeight={500}
+      maxwidth={700}
+      maxheight={500}
       ms={500}
     >
       <Modal.Head>
@@ -434,7 +434,7 @@ const Layout = ({ children }) => (
       </a>
     </div>
     {children}
-    <div className="credits">Created with <span class="love"></span> by <a href="https://codepen.io/ivanodintsov">Ivan Odintsov</a></div>
+    <div className="credits">Created with <span className="love"></span> by <a href="https://codepen.io/ivanodintsov">Ivan Odintsov</a></div>
   </React.Fragment>
 )
 
