@@ -4,6 +4,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
+import App from './components/App';
+import reducers from './reducers';
+
+// Development only axios helpers!
+import axios from 'axios';
+window.axios = axios;
+
 import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
 
 const cloneChildren = (children, props) => React.Children.map(children, child => <child.type {...child.props} {...props} />)
