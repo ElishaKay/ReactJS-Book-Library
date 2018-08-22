@@ -30,6 +30,7 @@ class ImageContent extends Component {
     const { handleSubmit } = this.props;
 
     return (
+    <div className="container">
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title For Book"
@@ -46,9 +47,9 @@ class ImageContent extends Component {
           name="content"
           component={this.renderField}
         />
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/" className="btn btn-danger">Cancel</Link>
+        <button type="submit" className="btn btn-primary">Submit</button>        
       </form>
+    </div>
     );
   }
 }

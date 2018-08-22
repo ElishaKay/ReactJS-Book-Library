@@ -34,15 +34,6 @@ class BooksIndex extends Component {
   render() {
     return (
       <div>
-        <div className="text-xs-right">
-          <Link className="btn btn-primary" to="/books/new">
-            Add a Book
-          </Link>
-        </div>
-        <h3>Books</h3>
-        <ul className="list-group">
-          {this.renderBooks()}
-        </ul>
         <Layout>
           <div className='grid'>
             <ImageModalList images={_.map(this.props.books)}/>
