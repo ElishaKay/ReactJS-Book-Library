@@ -7,7 +7,6 @@ import { fetchBooks } from "../../actions";
 import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
 import { cloneChildren, Head, Content, easingFunctions, getElapsedTime, calcProgressVal, callFn, getNewStyles, setStyleToElement, setStylesToElement, pickFromRect, _findChildren, findChildrenOr, findChildren, findChildrenOrIdentity, getLastPositionStyles, states, openState, afterOpenState, closingState, isActiveState, isAfterOpenState, isClosingState, isOpenedState } from "../../helpers/modalStyling";
 
-import images from '../Modal/images'
 import ImageModalList from '../Modal/ImageModalList'
 import Layout from '../Modal/Layout'
 
