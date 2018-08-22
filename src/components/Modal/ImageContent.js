@@ -6,7 +6,8 @@ import { updateBook } from "../../actions";
 
 class ImageContent extends Component {
   componentWillMount () {
-    this.props.initialize({ title: this.props.title, content: this.props.text });
+    let {title, content, author, published } = this.props;
+    this.props.initialize({ title, content, author, published});
   }
 
   renderField(field) {
@@ -25,7 +26,7 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.updateBook(values, () => {
+    this.props.updateBook({...values, id: this.props.id, img: this.props.img}, () => {
       this.props.history.push("/");
     });
   }
@@ -42,8 +43,13 @@ class ImageContent extends Component {
           component={this.renderField}
         />
         <Field
-          label="Categories"
-          name="categories"
+          label="Author"
+          name="author"
+          component={this.renderField}
+        />
+        <Field
+          label="Published"
+          name="published"
           component={this.renderField}
         />
         <Field

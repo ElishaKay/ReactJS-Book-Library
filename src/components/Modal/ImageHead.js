@@ -9,7 +9,7 @@ export default ({ title, img, modal: { isOpen, original, close } }) => (
           ? <button className='image__close' onClick={close}>&#10006;</button>
           : null
       }
-      <h2>{title}</h2>
+       <button type="button" disabled>{title}</button>
     </div>
   </div>
 )

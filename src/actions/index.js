@@ -17,7 +17,7 @@ export const fetchBooks = () => async dispatch => {
                 author: book.authors[0], 
                 img: imgSrc,
                 published: book.publishedDate,
-                text: book.description,
+                content: book.description,
                 udpateBook: false
     }
   }
@@ -27,7 +27,7 @@ export const fetchBooks = () => async dispatch => {
 export const updateBook = (values, callback) => async dispatch => {
   console.log(values);
 
-  dispatch({ type: UPDATE_BOOK, payload: res.data });
+  dispatch({ type: UPDATE_BOOK, payload: values });
 }
 
 export const fetchBook = id => async dispatch => {
