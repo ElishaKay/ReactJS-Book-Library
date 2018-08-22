@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createBook } from "../../actions";
+import { updateBook } from "../../actions";
 
 class ImageContent extends Component {
+  componentWillMount () {
+    this.props.initialize({ title: this.props.title, content: this.props.text });
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -21,7 +25,7 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.createBook(values, () => {
+    this.props.updateBook(values, () => {
       this.props.history.push("/");
     });
   }
@@ -75,6 +79,8 @@ function validate(values) {
 }
 
 export default reduxForm({
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm"
-})(connect(null, { createBook })(ImageContent));
+})(connect(null, { updateBook })(ImageContent));
