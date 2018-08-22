@@ -35,7 +35,7 @@ class ImageContent extends Component {
 
   onDeleteClick() {
     this.props.deleteBook(this.props.id, () => {
-      this.props.close();
+      this.props.modal.close();
     });
   }
 
