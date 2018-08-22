@@ -3,10 +3,6 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createBook } from "../actions";
 
-import Modal from '../Modal/Modal';
-import ImageHead from '../Modal/ImageHead';
-import ImageContent from '../Modal/ImageContent';
-
 class AddBook extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -24,7 +20,7 @@ class AddBook extends Component {
   }
 
   onSubmit(values) {
-    this.props.createPost(values, () => {
+    this.props.createBook(values, () => {
       this.props.history.push("/");
     });
   }
