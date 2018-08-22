@@ -1,54 +1,86 @@
 import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchBook, updateBook } from "../../actions";
-import BooksNew from "../Books/BooksNew";
+import { updateBook } from "../../actions";
 
 class ImageContent extends Component {
-  componentWillMount() {
-    this.setState({ editing: false })
-    console.log('this.props in ImageContent Component',this.props);
-    console.log()
+  componentWillMount () {
+    this.props.initialize({ title: this.props.title, content: this.props.text });
   }
 
-  renderContent() {
-    if (this.props.udpateBook) {
-      return (
-         <div className='image-content'>
-            <h3>{this.props.title}</h3>
-            <h6>Author: {this.props.author}</h6>
-            <h6>Published: {this.props.published}</h6>
-            <p>{this.props.text}</p>
-
-            <button 
-              className="btn btn-info pull-xs-right"
-              onClick={this.setState({ editing: true })}
-            >
-                Edit Book
-            </button>
-        </div>
-      );
-    }
+  renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
     return (
-      <BooksNew book={this.props} />
+      <div className={className}>
+        <label>{field.label}</label>
+        <input className="form-control" type="text" {...field.input} />
+        <div className="text-help">
+          {touched ? error : ""}
+        </div>
+      </div>
     );
+  }
+
+  onSubmit(values) {
+    this.props.updateBook(values, () => {
+      this.props.history.push("/");
+    });
   }
 
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-    	 <div>
-	        {this.renderContent()}
-	     </div>
+    <div className="container">
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <Field
+          label="Title For Book"
+          name="title"
+          component={this.renderField}
+        />
+        <Field
+          label="Categories"
+          name="categories"
+          component={this.renderField}
+        />
+        <Field
+          label="Book Content"
+          name="content"
+          component={this.renderField}
+        />
+        <button type="submit" className="btn btn-primary">Submit</button>        
+      </form>
+    </div>
     );
   }
-};
-
-
-function mapStateToProps(state) {
-  return {
-    book: state.activeBook
-  };
 }
 
+function validate(values) {
+  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
+  const errors = {};
 
-export default connect(mapStateToProps, { fetchBook, updateBook })(ImageContent);
+  // Validate the inputs from 'values'
+  if (!values.title) {
+    errors.title = "Enter a title";
+  }
+  if (!values.categories) {
+    errors.categories = "Enter some categories";
+  }
+  if (!values.content) {
+    errors.content = "Enter some content please";
+  }
+
+  // If errors is empty, the form is fine to submit
+  // If errors has *any* properties, redux form assumes form is invalid
+  return errors;
+}
+
+export default reduxForm({
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
+  validate,
+  form: "BooksNewForm"
+})(connect(null, { updateBook })(ImageContent));
