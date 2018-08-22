@@ -43,8 +43,13 @@ class ImageContent extends Component {
           component={this.renderField}
         />
         <Field
-          label="Categories"
-          name="categories"
+          label="Author"
+          name="author"
+          component={this.renderField}
+        />
+        <Field
+          label="Published"
+          name="published"
           component={this.renderField}
         />
         <Field
