@@ -30,15 +30,7 @@ export const updateBook = (values, callback) => async dispatch => {
   dispatch({ type: UPDATE_BOOK, payload: values });
 }
 
-export const fetchBook = id => async dispatch => {
-  const res = await axios.get(`${ROOT_URL}/books/${id}${API_KEY}`);
-
-  dispatch({ type: FETCH_BOOK, payload: res.data });
-}
-
-export const deleteBook = (id, callback) => async dispatch => {
-  const res = await axios.delete(`${ROOT_URL}/books/${id}${API_KEY}`)
-  callback();
-
+export const deleteBook = (id) => async dispatch => {
+  console.log('book to delete has id of:',id)
   dispatch({ type: DELETE_BOOK, payload: id });
 }

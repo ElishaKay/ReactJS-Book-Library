@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateBook } from "../../actions";
+import { updateBook, deleteBook  } from "../../actions";
+
 
 class ImageContent extends Component {
   componentWillMount () {
+    console.log('this.props in ImageContent Component: ',this.props)
     let {title, content, author, published } = this.props;
     this.props.initialize({ title, content, author, published});
   }
@@ -28,6 +30,12 @@ class ImageContent extends Component {
   onSubmit(values) {
     this.props.updateBook({...values, id: this.props.id, img: this.props.img}, () => {
       this.props.history.push("/");
+    });
+  }
+
+  onDeleteClick() {
+    this.props.deleteBook(this.props.id, () => {
+      this.props.close();
     });
   }
 
@@ -57,8 +65,11 @@ class ImageContent extends Component {
           name="content"
           component={this.renderField}
         />
-        <button type="submit" className="btn btn-primary">Submit</button>        
+        <button type="submit" className="btn btn-primary">Update</button>      
       </form>
+        <button className="btn btn-danger float-right deleteBook"
+          onClick={this.onDeleteClick.bind(this)}
+        >Delete</button>
     </div>
     );
   }
@@ -89,4 +100,4 @@ export default reduxForm({
   keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm"
-})(connect(null, { updateBook })(ImageContent));
+})(connect(null, { updateBook,deleteBook })(ImageContent));
