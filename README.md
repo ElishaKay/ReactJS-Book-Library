@@ -1,5 +1,7 @@
 # ReactJS-Book-Library
 
+<img src="screenshot.jpeg">
+
 Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.
 
 For testing: you can add axios to the main window object, and run in the Console:

@@ -18,7 +18,7 @@ class BooksIndex extends Component {
       <div>
         <Layout>
           <div className='grid'>
-            <ImageModalList images={_.map(this.props.books)}/>
+            <ImageModalList images={_.map(this.props.books).reverse()}/>
           </div>
         </Layout>
       </div>
