@@ -25,7 +25,7 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.updateBook(values, () => {
+    this.props.updateBook({...values, id: this.props.id}, () => {
       this.props.history.push("/");
     });
   }
