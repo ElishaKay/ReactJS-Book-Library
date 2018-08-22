@@ -10,13 +10,16 @@ export const fetchBooks = () => async dispatch => {
   let id = 0;
   console.log(res);
   for(let i=0; i<9; i++){
-    let book = res.data.items[i].volumeInfo;
+   let book = res.data.items[i].volumeInfo;
+    let imgSrc = book.imageLinks ? book.imageLinks.thumbnail.replace("zoom=1", "zoom=100") : 'http://vollrath.com/ClientCss/images/VollrathImages/No_Image_Available.jpg'
     books[i] = {id: id++,
                 title: book.title,
                 author: book.authors[0], 
-                img: book.imageLinks.thumbnail.replace("zoom=1", "zoom=100"),
+                img: imgSrc,
                 published: book.publishedDate,
-                text: book.description}
+                text: book.description,
+                udpateBook: false
+               }
   }
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
