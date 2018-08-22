@@ -16,20 +16,6 @@ class BooksIndex extends Component {
     this.props.fetchBooks();
   }
 
-  renderBooks() {
-    console.log(this.props.books);
-    console.log('_.map(this.props.books: ', _.map(this.props.books))
-    return _.map(this.props.books, book => {
-      return (
-        <li className="list-group-item" key={book.id}>
-          <Link to={`/books/${book.id}`}>
-            {book.title}
-          </Link>
-        </li>
-      );
-    });
-  }
-
   render() {
     return (
       <div>
