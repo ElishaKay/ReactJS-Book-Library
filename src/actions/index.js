@@ -26,7 +26,7 @@ export const fetchBooks = () => async dispatch => {
 
 export const updateBook = (values, callback) => async dispatch => {
   console.log(values);
-
+  callback();
   dispatch({ type: UPDATE_BOOK, payload: values });
 }
 
