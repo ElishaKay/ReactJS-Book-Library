@@ -2,7 +2,7 @@
 
 Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.
 
-For testing: add axios to the main window object, and run in the Console:
+For testing: you can add axios to the main window object, and run in the Console:
 
 ```javascript
 axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
