@@ -17,7 +17,7 @@ export const fetchBooks = () => async dispatch => {
                 author: book.authors[0], 
                 img: imgSrc,
                 published: book.publishedDate,
-                text: book.description,
+                content: book.description,
                 udpateBook: false
     }
   }

@@ -6,7 +6,8 @@ import { updateBook } from "../../actions";
 
 class ImageContent extends Component {
   componentWillMount () {
-    this.props.initialize({ title: this.props.title, content: this.props.text,
+    console.log('this.props: ',this.props)
+    this.props.initialize({ title: this.props.title, content: this.props.content,
                             author: this.props.title, published: this.props.published});
   }
 
