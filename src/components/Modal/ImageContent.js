@@ -65,7 +65,7 @@ class ImageContent extends Component {
           name="content"
           component={this.renderField}
         />
-        <button type="submit" className="btn btn-primary">Update</button>      
+        <button type="submit" className="btn btn-primary">Save</button>      
       </form>
         <button className="btn btn-danger float-right deleteBook"
           onClick={this.onDeleteClick.bind(this)}
