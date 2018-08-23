@@ -4,24 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
-const FIELDS = {
-  title: {
-    type: 'input',
-    label: 'Book Title'
-  },
-  author: {
-    type: 'input',
-    label: 'Author'
-  },
-  published: {
-     type: 'input',
-     label: 'Published'
-  },
-  content: {
-     type: 'textarea',
-     label: 'Summary'
-  }
-}
+import bookFormFields from '../../constants/bookFormFields'
 
 class ImageContent extends Component {
   componentWillMount () {
@@ -86,7 +69,6 @@ class ImageContent extends Component {
         />
         <button type="submit" className="btn btn-primary">Save</button>      
       </form>
-      { }
       {!newBook ? <button className="btn btn-danger float-right delete-book"
           onClick={this.onDeleteClick.bind(this)}
         >Delete</button> : ""}
@@ -98,7 +80,7 @@ class ImageContent extends Component {
 function validate(values) {
   const errors = {};
 
-  _.each(FIELDS, (type, field) => {
+  _.each(bookFormFields, (type, field) => {
       if(!values[field]){
         if(field=='title'){
           errors[field] = 'Please include a Title'
@@ -120,5 +102,5 @@ export default reduxForm({
   keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm",
-  fields: _.keys(FIELDS)
+  fields: _.keys(bookFormFields)
 })(connect(null, { saveBook,deleteBook })(ImageContent));
