@@ -1,9 +1,27 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
-
+const FIELDS = {
+  title: {
+    type: 'input',
+    label: 'Book Title'
+  },
+  author: {
+    type: 'input',
+    label: 'Author'
+  },
+  published: {
+     type: 'input',
+     label: 'Published'
+  },
+  content: {
+     type: 'textarea',
+     label: 'Summary'
+  }
+}
 
 class ImageContent extends Component {
   componentWillMount () {
@@ -62,7 +80,7 @@ class ImageContent extends Component {
           component={this.renderField}
         />
         <Field
-          label="Book Content"
+          label="Summary"
           name="content"
           component={this.renderField}
         />
@@ -78,22 +96,22 @@ class ImageContent extends Component {
 }
 
 function validate(values) {
-  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
   const errors = {};
 
-  // Validate the inputs from 'values'
-  if (!values.title) {
-    errors.title = "Enter a title";
-  }
-  if (!values.categories) {
-    errors.categories = "Enter some categories";
-  }
-  if (!values.content) {
-    errors.content = "Enter some content please";
-  }
+  _.each(FIELDS, (type, field) => {
+      if(!values[field]){
+        if(field=='title'){
+          errors[field] = 'Please include a Title'
+        } else if(field=='author') {
+          errors[field] = 'Who wrote it?'
+        } else if(field=='published') {
+          errors[field] = 'When was it Published?'
+        } else {
+          errors[field] = 'Please include a Short Summary/Teaser'
+        }
+      }
+  })
 
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
   return errors;
 }
 
@@ -101,5 +119,6 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   validate,
-  form: "BooksNewForm"
+  form: "BooksNewForm",
+  fields: _.keys(FIELDS)
 })(connect(null, { saveBook,deleteBook })(ImageContent));
