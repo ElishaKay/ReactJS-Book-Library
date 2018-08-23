@@ -17,9 +17,13 @@ class ImageContent extends Component {
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
     return (
-      <Field
-      
-      />
+      <div className={className}>
+        <label className="text-primary">{field.label}</label>
+        <input className="form-control" type="text" {...field.input} />
+        <div className="error-text">
+          {touched ? error : ""}
+        </div>
+      </div>
     );
   }
 
@@ -43,7 +47,28 @@ class ImageContent extends Component {
     return (
     <div className="container book-form" >
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-      {_.map(bookFormFields, this.renderField.bind(this))}        
+      
+      <Field
+          label="Title For Book"
+          name="title"
+          component={this.renderField}
+        />
+        <Field
+          label="Author"
+          name="author"
+          component={this.renderField}
+        />
+        <Field
+          label="Published"
+          name="published"
+          component={this.renderField}
+        />
+        <Field
+          label="Summary"
+          name="content"
+          component={this.renderField}
+        />
+
         <button type="submit" className="btn btn-primary">Save</button>      
       </form>
       {!newBook ? <button className="btn btn-danger float-right delete-book"
