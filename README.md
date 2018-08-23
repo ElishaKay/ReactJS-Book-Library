@@ -1,7 +1,5 @@
 # ReactJS-Book-Library
 
-<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/gist-embed/1.3/gist-embed.min.js'></script>
-
 <img src="screenshot.jpeg">
 
 Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.
@@ -19,7 +17,7 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 ```
 
 
-<h3>Other interesting sources</h3>
+<h1>Other interesting sources</h1>
 
 <h5>Making the displayed books more interesting</h5>
 
@@ -29,13 +27,17 @@ With the New York Times API, you can fetch a list of top sellers. You can then f
 
 https://www.googleapis.com/books/v1/volumes?q=ISBN:0525557628
 
-<h5>Higher Order Components (HOC)</h5>
+<h2>Higher Order Components (HOC)</h2>
 
-Source: <a href="https://codeburst.io/forms-with-redux-form-v7-part-1-of-2-e636d760e9b4">Wrapping Our Form Container with Redux Form’s Higher Order Component</a>
+Question: What do Redux's connect() function, Redux-Form's reduxForm() function, and React Router’s withRouter() function have in common? 
 
-"We start by making a container, a normal React component that renders FormComponent and wraps it with Redux Form’s reduxForm() helper. reduxForm() is a function that takes in a form configuration object and returns a HOC, a function that takes and returns a component.
+Answer: They're all HOC's: functions that allow us to add additional properties to our components. A Higher Order Component (HOC), is a function that takes a child component and some options, then builds a container for that child.
 
-The purpose of such wrapping in this case is to return the wrapped component with a bunch of helpers — functions that can change the state of the form or give you information as to whether a form field was touched or validated, or which fields are registered — passed through as props.
+It’s “higher order” in the same way as a “higher order function” — a function that builds a function. In fact you can think of React Components as functions that produce UI. This works especially well for functional stateless components, but if you squint, it works for pure stateful presentational components as well. A HOC is exactly a higher order function.
+
+<h4>HOC #1: Redux Form</h4>
+
+Let's look at an example with redux-form:
 
 ```javascript
 import React from 'react';
@@ -56,15 +58,94 @@ const formConfiguration = {
 export default reduxForm(formConfiguration)(FormContainer);
 ```
 
-<code data-gist-id='6259775'>
-  <!-- you dont have to put anything in here, but it provides a usable fallback if the script fails -->
-  <br /><a href='https://gist.github.com/metatribal/6259775'>Click to view Gist... </a>
-</code>
+In the case of Redux-Form, the reduxForm function take in a form configuration object and returns a HOC, a function that takes and returns a component.
 
-<code data-gist-id="gist43098316">
- <br /><a href='https://gist.github.com/metatribal/6259775'>Click to view Gist... </a>
-</code>
+The purpose of such wrapping is to return the wrapped component with a bunch of helpers — functions that can change the state of the form or give you information as to whether a form field was touched or validated, or which fields are registered — passed through as props.
 
-Note: The most common example of HOC is probably Redux’s connect() function 
+In the case of this repo, within the <a href="src/components/Modal/ImageContent.js">form-component</a>, you'll notice we're able to pull of a helper function handleSubmit from props, and then use it as an event handler for our JSX form-onSubmit event:
 
-https://medium.freecodecamp.org/understanding-higher-order-components-6ce359d761b
+```javascript
+render() {
+    const { handleSubmit } = this.props;
+
+    return (
+    <div className="container">
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <Field
+          label="Title For Book"
+          name="title"
+          component={this.renderField}
+        />
+```
+
+How did that helper function get to be on props?
+
+Answer: the reduxForm function that we saw in the previous example put it there by wiring up the built-in redux-form helpers with our existing component.
+
+```javascript
+export default reduxForm(formConfiguration)(FormContainer);
+```
+
+<h4>HOC #2: Redux</h4>
+
+Let's flip to the actual Redux library. We'll start by explaining its general purpose:
+
+<h6>Components before Redux</h6>
+
+A React Application consists of a set of components. A component is passed a set of input properties (props) and produces some HTML which is rendered to the screen. When the component’s props change, it re-renders and the HTML may change.
+
+A component’s render function returns one or instances of other components. In general, components interact only by passing props to their children or triggering callbacks passed by their parents.
+
+So, how do we deal with global state?
+
+One approach to global state is to attach it to the highest “root” component in your app and pass it down the tree to all the components that need it. You then pass all changes to that state back up the tree via a chain of callbacks.
+
+This approach gets unwieldy pretty quickly, though - and you can quickly enter callback hell. Enter the hero: Redux.
+
+
+<h6>Components after Redux</h6>
+
+Redux allows components to access global state anywhere in the view tree, but not all components need access to the global state. Hence, the article by Dan Abramov, co-creator of Redux: <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">Presentational and Container Components</a>
+
+- The container component does the “dirty” global state work.
+- The presentational component does not.
+
+Each container component needs to be concerned with 2 things:
+
+a) Which child component will it render? 
+b) And what data is it fetching?
+
+
+Therefore, if we didn’t have react-redux's connect HOC, a container might look like this:
+
+```javascript
+// This is a vastly simplified implementation of what a Redux container would do
+class MyComponentContainer extends Component {
+  mapStateToProps(state) {
+    // this function is specific to this particular container
+    return state.foo.bar;
+  }
+
+  render() {
+    // This is how you get the current state from Redux,
+    // and would be identical, no mater what mapStateToProps does
+    const { state } = this.context.store.getState();
+    
+    const props = this.mapStateToProps(state);
+    
+    return <MyComponent {...this.props} {...props} />;
+  }
+}
+```
+
+
+In the case of React Router’s withRouter() function: it simply grabs the router off the context and makes it a prop for the child.
+
+
+Sources: 
+
+a) <a href="https://codeburst.io/forms-with-redux-form-v7-part-1-of-2-e636d760e9b4">Wrapping Our Form Container with Redux Form’s Higher Order Component</a>
+
+b) <a href="https://medium.freecodecamp.org/understanding-higher-order-components-6ce359d761b">Understanding Higher Order Components</a>
+
+c) Udemy Course: <a href="https://www.udemy.com/react-redux/learn/v4/t/lecture/6946612">Modern React with Redux by Stephen Grider</a>. Section 9, Lecture 137: "Handling Form Submittal".
