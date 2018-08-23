@@ -193,6 +193,8 @@ The purpose of the connect() function is to build an Intelligent Redux Container
 Similarly, React Router’s withRouter() method gives you access to the match, location, and history properties of the browser’s native API necessary to make your Link and Route components work correctly. It simply grabs the router off the context and makes it a prop for the child.
 
 
+
+
 Sources: 
 
 a) <a href="https://codeburst.io/forms-with-redux-form-v7-part-1-of-2-e636d760e9b4">Wrapping Our Form Container with Redux Form’s Higher Order Component</a>

@@ -16,7 +16,7 @@ class ImageContent extends Component {
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
     return (
-      <div className={className}>
+      <div className={className+ " book-form"}>
         <label>{field.label}</label>
         <input className="form-control" type="text" {...field.input} />
         <div className="text-help">
@@ -27,9 +27,10 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.saveBook({...values, id: this.props.id, img: this.props.img}, () => {
-      this.props.modal.close();
-    });
+    let {saveBook, id, img, modal: { close }} = this.props;
+    saveBook({...values, id, img}, () => 
+        close()
+    );
   }
 
   onDeleteClick() {
@@ -66,7 +67,7 @@ class ImageContent extends Component {
         />
         <button type="submit" className="btn btn-primary">Save</button>      
       </form>
-        <button className="btn btn-danger float-right deleteBook"
+        <button className="btn btn-danger float-right delete-book"
           onClick={this.onDeleteClick.bind(this)}
         >Delete</button>
     </div>
