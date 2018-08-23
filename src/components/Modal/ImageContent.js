@@ -7,8 +7,8 @@ import { saveBook, deleteBook  } from "../../actions";
 
 class ImageContent extends Component {
   componentWillMount () {
-    let {title, content, author, published } = this.props;
-    this.props.initialize({ title, content, author, published});
+    let {initialize, title, content, author, published } = this.props;
+    initialize({ title, content, author, published});
   }
 
   renderField(field) {
@@ -34,9 +34,10 @@ class ImageContent extends Component {
   }
 
   onDeleteClick() {
-    this.props.deleteBook(this.props.id, () => {
-      this.props.modal.close();
-    });
+    let {deleteBook, id, modal: { close }} = this.props;
+    deleteBook(id, () => 
+        close()
+    );
   }
 
   render() {
