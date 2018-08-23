@@ -1,14 +1,15 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
-
+import bookFormFields from '../../constants/bookFormFields'
 
 class ImageContent extends Component {
   componentWillMount () {
-    let {title, content, author, published } = this.props;
-    this.props.initialize({ title, content, author, published});
+    let {initialize, title, content, author, published } = this.props;
+    initialize({ title, content, author, published});
   }
 
   renderField(field) {
@@ -17,9 +18,9 @@ class ImageContent extends Component {
 
     return (
       <div className={className}>
-        <label>{field.label}</label>
+        <label className="text-primary">{field.label}</label>
         <input className="form-control" type="text" {...field.input} />
-        <div className="text-help">
+        <div className="error-text">
           {touched ? error : ""}
         </div>
       </div>
@@ -27,24 +28,27 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.saveBook({...values, id: this.props.id, img: this.props.img}, () => {
-      this.props.modal.close();
-    });
+    let {saveBook, id, img, modal: { close }} = this.props;
+    saveBook({...values, id, img}, () => 
+        close()
+    );
   }
 
   onDeleteClick() {
-    this.props.deleteBook(this.props.id, () => {
-      this.props.modal.close();
-    });
+    let {deleteBook, id, modal: { close }} = this.props;
+    deleteBook(id, () => 
+        close()
+    );
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, newBook } = this.props;
 
     return (
-    <div className="container">
+    <div className="container book-form" >
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
+      
+      <Field
           label="Title For Book"
           name="title"
           component={this.renderField}
@@ -60,37 +64,38 @@ class ImageContent extends Component {
           component={this.renderField}
         />
         <Field
-          label="Book Content"
+          label="Summary"
           name="content"
           component={this.renderField}
         />
+
         <button type="submit" className="btn btn-primary">Save</button>      
       </form>
-        <button className="btn btn-danger float-right deleteBook"
+      {!newBook ? <button className="btn btn-danger float-right delete-book"
           onClick={this.onDeleteClick.bind(this)}
-        >Delete</button>
+        >Delete</button> : ""}
     </div>
     );
   }
 }
 
 function validate(values) {
-  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
   const errors = {};
 
-  // Validate the inputs from 'values'
-  if (!values.title) {
-    errors.title = "Enter a title";
-  }
-  if (!values.categories) {
-    errors.categories = "Enter some categories";
-  }
-  if (!values.content) {
-    errors.content = "Enter some content please";
-  }
+  _.each(bookFormFields, (type, field) => {
+      if(!values[field]){
+        if(field=='title'){
+          errors[field] = 'Please include a Title'
+        } else if(field=='author') {
+          errors[field] = 'Who wrote it?'
+        } else if(field=='published') {
+          errors[field] = 'When was it Published?'
+        } else {
+          errors[field] = 'Please include a Short Summary/Teaser'
+        }
+      }
+  })
 
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
   return errors;
 }
 
@@ -98,5 +103,6 @@ export default reduxForm({
   enableReinitialize: true,
   keepDirtyOnReinitialize: true,
   validate,
-  form: "BooksNewForm"
+  form: "BooksNewForm",
+  fields: _.keys(bookFormFields)
 })(connect(null, { saveBook,deleteBook })(ImageContent));

@@ -31,6 +31,13 @@ export default class Modal extends Component {
     this.clone = React.createRef()
     this.content = React.createRef()
   }
+  _isMounted = false
+  componentDidMount(){
+    this._isMounted = true
+  }
+  componentWillUnmount(){
+    this._isMounted = false
+  }
 
   animate({ from, to, loop, processCallback, doneCallBack }) {
     const elapsed = getElapsedTime(this.state.startDate)
@@ -72,24 +79,28 @@ export default class Modal extends Component {
   }
 
   openDoneCallback({ styles, newStyles }) {
-    this.setState({
-      state: states.OPENED,
-      styles: {
-        ...styles,
-        ...newStyles,
-        left: '50%',
-        top: '50%',
-        transform: 'translate3d(-50%, -50%, 0)'
-      }
-    })
+    if (this._isMounted){
+      this.setState({
+        state: states.OPENED,
+        styles: {
+          ...styles,
+          ...newStyles,
+          left: '50%',
+          top: '50%',
+          transform: 'translate3d(-50%, -50%, 0)'
+        }
+      })
+    }
   }
 
   closeDoneCallback() {
-    this.setState({
-      state: states.IDLE,
-      styles: {},
-      bodyStyles: {}
-    })
+    if (this._isMounted){
+      this.setState({
+        state: states.IDLE,
+        styles: {},
+        bodyStyles: {}
+      })
+    }
   }
 
   _open() {
