@@ -112,8 +112,8 @@ Redux allows components to access global state anywhere in the view tree, but no
 
 Each container component needs to be concerned with 2 things:
 
-a) Which child component will it render? 
-b) And what data is it fetching?
+- Which child component will it render? 
+- And what data is it fetching?
 
 
 Therefore, if we didn’t have react-redux's connect HOC, a container might look like this:
@@ -138,8 +138,59 @@ class MyComponentContainer extends Component {
 }
 ```
 
+This is what the Redux's connect() function is doing for us behind the scenes. It fetches the global state (i.e. 'store') from Redux and then passes the state object through a 'mapStatesToProps' filter. Instead of passing your entire global state object into your new container, the mapStateToProps function allows you to set a filter on which state you pass into your new container.
 
-In the case of React Router’s withRouter() function: it simply grabs the router off the context and makes it a prop for the child.
+Here's what the above code is essentially doing:
+
+```javascript
+const props = state.foo.bar;
+
+return <MyComponent {...this.props} {...props} />;
+```
+
+So, in short, the connect function is adding {props: state.foo.bar} as a key-value pair to the newly generated component.  
+
+Here's an example of how Redux is actually used in production (<a href="https://github.com/ElishaKay/reactjs-posts-and-emails/blob/add-posts/server/client/src/components/surveys/SurveyList.js">full context here</a>).
+
+```
+function mapStateToProps({ surveys }) {
+  return { surveys };
+}
+
+export default connect(mapStateToProps, { fetchSurveys })(SurveyList);
+```
+
+In the above case, we're doing essentially the same thing. The mapStateToProps filter, pulls the surveys key-value pair off of the global state object. The surveys object is then passed in as a parameter to the connect() function.
+
+With this example as context, let's try to answer the 2 questions that we asked above, that each container component needs to answer
+
+- Which child component will it render? 
+Answer: The SurveyList Component.
+
+- And what data is it fetching off the global state?
+Answer: The surveys data.
+
+But what's the connect() function actually doing? How does it generate a new component?
+
+Here's a dumbed-down version of what the connect() function does:
+
+```javascript
+function buildReduxContainer(ChildComponentClass, mapStateToProps) {
+  return class Container extends Component {
+    render() {
+      const { state } = this.context.store.getState();
+
+      const props = mapStateToProps(state);
+
+      return <ChildComponentClass {...this.props} {...props} />;
+    }
+  }
+}
+```
+
+The purpose of the connect() function is to build an Intelligent Redux Container. It filters through the global state according to your needs, takes that data and sets it as a prop of a newly created container component. So, in essence, your child component will now have both its own props + some new props taken directly from global state.
+
+Similarly, React Router’s withRouter() method gives you access to the match, location, and history properties of the browser’s native API necessary to make your Link and Route components work correctly. It simply grabs the router off the context and makes it a prop for the child.
 
 
 Sources: 
@@ -149,3 +200,5 @@ a) <a href="https://codeburst.io/forms-with-redux-form-v7-part-1-of-2-e636d760e9
 b) <a href="https://medium.freecodecamp.org/understanding-higher-order-components-6ce359d761b">Understanding Higher Order Components</a>
 
 c) Udemy Course: <a href="https://www.udemy.com/react-redux/learn/v4/t/lecture/6946612">Modern React with Redux by Stephen Grider</a>. Section 9, Lecture 137: "Handling Form Submittal".
+
+d) <a href="https://hackernoon.com/withrouter-advanced-features-of-react-router-for-single-page-apps-42b2a1a0d315">Understanding React Router’s withRouter() method</a>.
