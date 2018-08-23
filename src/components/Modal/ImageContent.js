@@ -16,10 +16,10 @@ class ImageContent extends Component {
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
     return (
-      <div className={className+ " book-form"}>
+      <div className={className}>
         <label>{field.label}</label>
         <input className="form-control" type="text" {...field.input} />
-        <div className="text-help">
+        <div className="error-text">
           {touched ? error : ""}
         </div>
       </div>
@@ -41,10 +41,10 @@ class ImageContent extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, newBook } = this.props;
 
     return (
-    <div className="container">
+    <div className="container book-form" >
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title For Book"
@@ -68,9 +68,10 @@ class ImageContent extends Component {
         />
         <button type="submit" className="btn btn-primary">Save</button>      
       </form>
-        <button className="btn btn-danger float-right delete-book"
+      { }
+      {!newBook ? <button className="btn btn-danger float-right delete-book"
           onClick={this.onDeleteClick.bind(this)}
-        >Delete</button>
+        >Delete</button> : ""}
     </div>
     );
   }
