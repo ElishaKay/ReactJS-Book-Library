@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_BOOKS, UPDATE_BOOK, DELETE_BOOK } from './types';
+import { FETCH_BOOKS, SAVE_BOOK, DELETE_BOOK } from './types';
 
 const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=computers";
 
@@ -23,9 +23,9 @@ export const fetchBooks = () => async dispatch => {
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
-export const updateBook = (values, callback) => dispatch => {
+export const saveBook = (values, callback) => dispatch => {
   callback();
-  dispatch({ type: UPDATE_BOOK, payload: values });
+  dispatch({ type: SAVE_BOOK, payload: values });
 }
 
 export const deleteBook = id => dispatch => {

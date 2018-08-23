@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateBook, deleteBook  } from "../../actions";
+import { saveBook, deleteBook  } from "../../actions";
 
 
 class ImageContent extends Component {
   componentWillMount () {
-    console.log('this.props in ImageContent Component: ',this.props)
     let {title, content, author, published } = this.props;
     this.props.initialize({ title, content, author, published});
   }
@@ -28,7 +27,7 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    this.props.updateBook({...values, id: this.props.id, img: this.props.img}, () => {
+    this.props.saveBook({...values, id: this.props.id, img: this.props.img}, () => {
       this.props.modal.close();
     });
   }
@@ -100,4 +99,4 @@ export default reduxForm({
   keepDirtyOnReinitialize: true,
   validate,
   form: "BooksNewForm"
-})(connect(null, { updateBook,deleteBook })(ImageContent));
+})(connect(null, { saveBook,deleteBook })(ImageContent));
