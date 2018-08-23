@@ -8,8 +8,6 @@ export default function(state = {}, action) {
     case SAVE_BOOK:
       return { ...state, [action.payload.id]: action.payload };
     case FETCH_BOOKS:
-      console.log('action.payload: ',action.payload)
-      console.log('_.map(action.payload): ',_.map(action.payload))
       return action.payload;
     default:
       return state;
