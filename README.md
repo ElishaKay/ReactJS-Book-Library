@@ -17,16 +17,6 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 ```
 
 
-<h1>Other interesting sources</h1>
-
-<h5>Making the displayed books more interesting</h5>
-
-https://medium.freecodecamp.org/build-a-best-sellers-list-with-new-york-times-google-books-api-46201c30aec7
-
-With the New York Times API, you can fetch a list of top sellers. You can then fetch the book covers by querying the google books API with the ISBN (from the NYTimes results)
-
-https://www.googleapis.com/books/v1/volumes?q=ISBN:0525557628
-
 <h2>Higher Order Components (HOC)</h2>
 
 Question: What do Redux's connect() function, Redux-Form's reduxForm() function, and React Router’s withRouter() function have in common? 
@@ -204,3 +194,19 @@ b) <a href="https://medium.freecodecamp.org/understanding-higher-order-component
 c) Udemy Course: <a href="https://www.udemy.com/react-redux/learn/v4/t/lecture/6946612">Modern React with Redux by Stephen Grider</a>. Section 9, Lecture 137: "Handling Form Submittal".
 
 d) <a href="https://hackernoon.com/withrouter-advanced-features-of-react-router-for-single-page-apps-42b2a1a0d315">Understanding React Router’s withRouter() method</a>.
+
+
+<h1>Other interesting sources</h1>
+
+<h5>Making the displayed books more interesting</h5>
+
+https://medium.freecodecamp.org/build-a-best-sellers-list-with-new-york-times-google-books-api-46201c30aec7
+
+With the New York Times API, you can fetch a list of top sellers. You can then fetch the book covers by querying the google books API with the ISBN (from the NYTimes results)
+
+https://www.googleapis.com/books/v1/volumes?q=ISBN:0525557628
+
+<h5>How to work with React the right way to avoid some common pitfalls</h5>
+
+https://medium.freecodecamp.org/how-to-work-with-react-the-right-way-to-avoid-some-common-pitfalls-fc9eb5e34d9e
+
