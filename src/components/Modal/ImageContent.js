@@ -50,8 +50,7 @@ class ImageContent extends Component {
             )
         },
         {
-          label: 'No',
-          onClick: () => alert('Click No')
+          label: 'No'
         }
       ]
     })
