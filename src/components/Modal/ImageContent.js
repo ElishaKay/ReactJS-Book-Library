@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
 import bookFormFields from '../../constants/bookFormFields'
+import renderDatePicker from '../Forms/renderDatePicker'
 
 class ImageContent extends Component {
   componentWillMount () {
@@ -60,7 +61,7 @@ class ImageContent extends Component {
         <Field
           label="Published"
           name="published"
-          component={this.renderField}
+          component={renderDatePicker}
         />
         <Field
           label="Summary"
