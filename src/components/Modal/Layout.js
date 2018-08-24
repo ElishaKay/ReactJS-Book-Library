@@ -8,8 +8,15 @@ export default ({ children, length }) => (
     <div className="title">
       <h1>ReactJS Book Library</h1>
     </div>
-    <ImageModal {...newBook} id={length}/>
-
+    <div className="row">
+    	<div className="col-md-4">
+    	</div>
+    	<div className="col-md-4">
+    		<ImageModal {...newBook} id={length}/>
+    	</div>
+    	<div className="col-md-4">
+    	</div>
+    </div>
     {children}
     <div className="credits">Created with <span className="love"></span> by <a href="https://github.com/ElishaKay?tab=repositories">Elisha Kramer</a></div>
   </React.Fragment>

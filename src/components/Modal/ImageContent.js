@@ -39,8 +39,8 @@ class ImageContent extends Component {
   onDeleteClick() {
     let {deleteBook, id, modal: { close }} = this.props;
     confirmAlert({
-      title: 'Confirm to submit',
-      message: 'Are you sure to do this.',
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this book?',
       buttons: [
         {
           label: 'Yes',
@@ -74,14 +74,15 @@ class ImageContent extends Component {
           component={this.renderField}
         />
         <Field
-          label="Published"
-          name="published"
-          component={renderDatePicker}
-        />
-        <Field
           label="Summary"
           name="content"
           component={this.renderField}
+        />
+         <label className="text-primary">Published</label>
+        <Field
+          label="Published"
+          name="published"
+          component={renderDatePicker}
         />
 
         <button type="submit" className="btn btn-primary">Save</button>      

@@ -221,3 +221,7 @@ body {
 .error-text{
   color: red;
 }
+
+span{
+  color: red; 
+}

@@ -4,7 +4,10 @@ import ImageHead from './ImageHead'
 import ImageContent from './ImageContent'
 
 export default item => (
-  <div key={item.id} className='grid__item'>
+  <div key={item.id} className='grid__item my-md-5' >
+  <div className="container">
+    <h5>{item.title}</h5>
+  </div>
     <Modal
       maxwidth={700}
       maxheight={500}
