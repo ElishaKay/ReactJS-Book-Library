@@ -85,7 +85,7 @@ class ImageContent extends Component {
           component={renderDatePicker}
         />
 
-        <button type="submit" className="btn btn-primary">Save</button>      
+        <button type="submit" className="btn btn-primary mt-md-3">Save</button>      
       </form>
       {!newBook ? <button className="btn btn-danger float-right delete-book"
           onClick={this.onDeleteClick.bind(this)}

@@ -2,16 +2,16 @@ import axios from 'axios';
 import { FETCH_BOOKS, SAVE_BOOK, DELETE_BOOK } from './types';
 import filterTitle from '../helpers/filterTitle'
 
-const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=computers";
+const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=how";
 
 export const fetchBooks = () => async dispatch => {
   const res = await axios.get(`${ROOT_URL}`);
 
   let books = {};
   let id = 0;
-  for(let i=0; i<6; i++){
+  for(let i=0; i<9; i++){
     let book = res.data.items[i].volumeInfo;
-    let imgSrc = book.imageLinks ? book.imageLinks.thumbnail.replace("zoom=1", "zoom=100") : 'http://vollrath.com/ClientCss/images/VollrathImages/No_Image_Available.jpg'
+    let imgSrc = book.imageLinks ? book.imageLinks.thumbnail.replace("zoom=1", "zoom=100") : 'https://www.classicposters.com/images/nopicture.gif'
     books[i] = {id: id++,
                 title: filterTitle(book.title),
                 author: book.authors[0], 
