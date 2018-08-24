@@ -210,3 +210,14 @@ body {
   vertical-align: middle;
   width: 16px;
 }
+
+.delete-book{
+  margin-bottom: 25px;
+}
+.book-form{
+  margin-top: 25px;
+  margin-bottom: 25px; 
+}
+.error-text{
+  color: red;
+}
