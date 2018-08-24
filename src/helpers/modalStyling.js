@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { map, is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
+import React from "react";
+import { is, contains, curry, reduce, toPairs, __, prop, equals, pipe, find, ifElse, F, identity } from 'ramda';
 
 export const cloneChildren = (children, props) => React.Children.map(children, child => <child.type {...child.props} {...props} />)
 export const Head = ({ children, ...props }) => cloneChildren(children, props)

@@ -10,6 +10,7 @@ import Layout from '../Modal/Layout'
 class BooksIndex extends Component {
   componentDidMount() {
     this.props.fetchBooks();
+    // console.log(this.props.books);
   }
 
   render() {

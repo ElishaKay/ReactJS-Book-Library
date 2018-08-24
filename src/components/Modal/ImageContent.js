@@ -99,11 +99,11 @@ function validate(values) {
 
   _.each(bookFormFields, (type, field) => {
       if(!values[field]){
-        if(field=='title'){
+        if(field==='title'){
           errors[field] = 'Please include a Title'
-        } else if(field=='author') {
+        } else if(field==='author') {
           errors[field] = 'Who wrote it?'
-        } else if(field=='published') {
+        } else if(field==='published') {
           errors[field] = 'When was it Published?'
         } else {
           errors[field] = 'Please include a Short Summary/Teaser'
