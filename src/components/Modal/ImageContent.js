@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
 import bookFormFields from '../../constants/bookFormFields'
 import renderDatePicker from '../Forms/renderDatePicker'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class ImageContent extends Component {
   componentWillMount () {
@@ -36,9 +38,23 @@ class ImageContent extends Component {
 
   onDeleteClick() {
     let {deleteBook, id, modal: { close }} = this.props;
-    deleteBook(id, () => 
-        close()
-    );
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => 
+             deleteBook(id, () => 
+                close()
+            )
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No')
+        }
+      ]
+    })
   }
 
   render() {
