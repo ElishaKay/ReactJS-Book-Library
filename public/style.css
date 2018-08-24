@@ -121,7 +121,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1115;
+  z-index: 3;
 }
 .transform-modal__container--open .transform-modal__background {
   position: fixed;
