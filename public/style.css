@@ -225,3 +225,9 @@ body {
 span{
   color: red; 
 }
+
+@media screen and (max-width: 992px) {
+  .book-title {
+     display: none;
+  }
+}

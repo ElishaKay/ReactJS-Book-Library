@@ -10,15 +10,18 @@ import Layout from '../Modal/Layout'
 class BooksIndex extends Component {
   componentDidMount() {
     this.props.fetchBooks();
-    // console.log(this.props.books);
+    console.log(this.props.books);
   }
 
   render() {
+     console.log(this.props.books);
+    let fetchedBooks = _.map(this.props.books)
+
     return (
       <div>
-        <Layout length={_.map(this.props.books).length}>
+        <Layout length={fetchedBooks.length}>
           <div className='grid'>
-            <ImageModalList images={_.map(this.props.books).reverse()}/>
+            <ImageModalList images={fetchedBooks.reverse()}/>
           </div>
         </Layout>
       </div>

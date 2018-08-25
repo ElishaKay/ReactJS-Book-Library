@@ -30,7 +30,7 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    let {saveBook, id, img, newBook, modal: { close }} = this.props;
+    let {saveBook, id, img, modal: { close }} = this.props;
     saveBook({...values, id, img}, () => 
         close()
     );

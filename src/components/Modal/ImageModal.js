@@ -5,8 +5,8 @@ import ImageContent from './ImageContent'
 
 export default item => (
   <div key={item.id} className='grid__item my-md-5' >
-  <div className="container">
-    <h5>{item.title}</h5>
+  <div className="container book-title">
+    <h5 className="book-title">{item.title}</h5>
   </div>
     <Modal
       maxwidth={700}
