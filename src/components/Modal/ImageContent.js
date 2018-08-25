@@ -31,8 +31,18 @@ class ImageContent extends Component {
 
   onSubmit(values) {
     let {saveBook, id, img, modal: { close }} = this.props;
-    saveBook({...values, id, img}, () => 
-        close()
+    saveBook({...values, id, img}, 
+            () => close(),
+            () => 
+              confirmAlert({
+                title: 'Title already exists',
+                message: 'Please choose a different title.',
+                buttons: [
+                  {
+                    label: 'Ok',
+                  }
+                ]
+              })
     );
   }
 

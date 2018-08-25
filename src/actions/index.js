@@ -24,22 +24,20 @@ export const fetchBooks = () => async dispatch => {
     }
     bookTitles.push({id: nextId, title: bookTitle });
   }
-  console.log('booktitles: ', bookTitles);
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
-export const saveBook = (values, callback) => dispatch => {
-  callback();
+export const saveBook = (values, onSuccess, onError) => dispatch => {
   console.log(values)
   values.img = values.img.includes("575c56519f72666e381d4efd") ? 'http://sybasigns.com.au/images/products-large/new-books-book-stickers.jpg' : values.img
   values.title = filterTitle(values.title);
 
   for (var key in bookTitles) {
     if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
-      console.log('Title already exists!')
+      return onError()
     }
   }
-  
+  onSuccess()
   dispatch({ type: SAVE_BOOK, payload: values });
 }
 
