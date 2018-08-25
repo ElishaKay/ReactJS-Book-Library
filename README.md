@@ -1,6 +1,6 @@
 # ReactJS-Book-Library
 
-<img src="screenshot.jpeg">
+<img src="book-library.jpeg">
 
 Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.
 

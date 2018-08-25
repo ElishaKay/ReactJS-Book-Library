@@ -28,7 +28,6 @@ export const fetchBooks = () => async dispatch => {
 }
 
 export const saveBook = (values, onSuccess, onError) => dispatch => {
-  console.log(values)
   values.img = values.img.includes("575c56519f72666e381d4efd") ? 'http://sybasigns.com.au/images/products-large/new-books-book-stickers.jpg' : values.img
   values.title = filterTitle(values.title);
 
