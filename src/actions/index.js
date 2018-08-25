@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FETCH_BOOKS, SAVE_BOOK, DELETE_BOOK } from './types';
 import filterTitle from '../helpers/filterTitle'
 
-const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=how";
+const ROOT_URL = "https://www.googleapis.com/books/v1/volumes?q=when";
 
 export const fetchBooks = () => async dispatch => {
   const res = await axios.get(`${ROOT_URL}`);
@@ -25,6 +25,8 @@ export const fetchBooks = () => async dispatch => {
 
 export const saveBook = (values, callback) => dispatch => {
   callback();
+  console.log(values)
+  values.img = values.img.includes("575c56519f72666e381d4efd") ? 'http://sybasigns.com.au/images/products-large/new-books-book-stickers.jpg' : values.img
   values.title = filterTitle(values.title);
   dispatch({ type: SAVE_BOOK, payload: values });
 }
