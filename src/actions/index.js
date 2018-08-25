@@ -13,31 +13,33 @@ export const fetchBooks = () => async dispatch => {
   for(let i=0; i<9; i++){
     let book = res.data.items[i].volumeInfo;
     let bookTitle = filterTitle(book.title);
-    bookTitles.push(bookTitle);
+    let nextId = id++;
     let imgSrc = book.imageLinks ? book.imageLinks.thumbnail.replace("zoom=1", "zoom=100") : 'https://www.classicposters.com/images/nopicture.gif'
-    books[i] = {id: id++,
+    books[i] = {id: nextId,
                 title: bookTitle,
                 author: book.authors[0], 
                 img: imgSrc,
                 published: book.publishedDate,
                 content: book.description
     }
+    bookTitles.push({id: nextId, title: bookTitle });
   }
   console.log('booktitles: ', bookTitles);
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
 export const saveBook = (values, callback) => dispatch => {
-  let bookTitle = filterTitle(values.title);
-  let titleExists = (bookTitles.indexOf(bookTitle) > -1);
-  if(titleExists){
-    console.log('title exists!');
-  } else {
-    callback();  
-  }
-
+  callback();
+  console.log(values)
   values.img = values.img.includes("575c56519f72666e381d4efd") ? 'http://sybasigns.com.au/images/products-large/new-books-book-stickers.jpg' : values.img
-  values.title = bookTitle;
+  values.title = filterTitle(values.title);
+
+  for (var key in bookTitles) {
+    if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
+      console.log('Title already exists!')
+    }
+  }
+  
   dispatch({ type: SAVE_BOOK, payload: values });
 }
 
