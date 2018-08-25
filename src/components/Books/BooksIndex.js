@@ -14,7 +14,6 @@ class BooksIndex extends Component {
   }
 
   render() {
-     console.log(this.props.books);
     let fetchedBooks = _.map(this.props.books)
 
     return (
