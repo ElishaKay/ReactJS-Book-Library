@@ -1,8 +1,15 @@
-# ReactJS-Book-Library
+
+*ReactJS*
+*Deployable to Heroku*
+*Redux*
+*Redux-Form*
+*CRUD Operations*
+*React-DatePicker*
+*Google-Books API*
+*Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.*
+*React-Confirm-Alert (prompts user before deletes or if a book with the same title already exists)*
 
 <img src="book-library.jpeg">
-
-Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.
 
 For testing: you can add axios to the main window object, and run in the Console:
 
@@ -16,6 +23,40 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 });
 ```
 
+
+<h2>The 3 Important Redux Store Methods</h2>
+
+A redux store has 3 important methods on it:
+
+a) store.getState() - gets the state.
+b) store.subscribe() - listens for changes to the store
+c) store.dispatch() - sends an action to update/make changes to the store.
+
+
+```javascript
+
+import { createStore} from 'redux';
+
+const store = createStore((state = 0, action) => {
+  return action.type === 'increment' ? state + 1 : state;
+});
+
+console.log(store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+})
+store.dispatch({ type: 'increment' });
+store.dispatch({ type: 'increment' });
+store.dispatch({ type: 'increment' });
+```
+
+The above code will log:
+```
+0
+1
+2
+3
+```
 
 <h2>Higher Order Components (HOC)</h2>
 
