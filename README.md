@@ -1,13 +1,13 @@
 
-*ReactJS*
-*Deployable to Heroku*
-*Redux*
-*Redux-Form*
-*CRUD Operations*
-*React-DatePicker*
-*Google-Books API*
-*Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.*
-*React-Confirm-Alert (prompts user before deletes or if a book with the same title already exists)*
+ - *ReactJS*
+ - *Deployable to Heroku*
+ - *Redux*
+ - *Redux-Form*
+ - *CRUD Operations*
+ - *React-DatePicker*
+ - *Google-Books API*
+ - *Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.*
+ - *React-Confirm-Alert (prompts user before deletes or if a book with the same title already exists)*
 
 <img src="book-library.jpeg">
 
@@ -24,13 +24,13 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 ```
 
 
-<h2>The 3 Important Redux Store Methods</h2>
+<h4>The 3 Important Redux Store Methods</h4>
 
 A redux store has 3 important methods on it:
 
-a) store.getState() - gets the state.
-b) store.subscribe() - listens for changes to the store
-c) store.dispatch() - sends an action to update/make changes to the store.
+ -  store.getState() - gets the state.
+ -  store.subscribe() - listens for changes to the store
+ -  store.dispatch() - sends an action to update/make changes to the store.
 
 
 ```javascript
