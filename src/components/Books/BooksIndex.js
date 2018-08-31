@@ -22,7 +22,6 @@ class BooksIndex extends Component {
            return resolve({exists: true})
         }
       }
-    console.log('should resolve')
     resolve({exists: false});  
     })
   }

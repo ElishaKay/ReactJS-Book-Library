@@ -33,7 +33,6 @@ class ImageContent extends Component {
     let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
     try{
       let res = await checkTitle(values);
-      console.log('res in ImageContent:',res);
       if (res.exists) {
         confirmAlert({
                   title: 'Title already exists',
