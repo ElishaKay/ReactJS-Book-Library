@@ -14,16 +14,14 @@ class BooksIndex extends Component {
     this.props.fetchBooks();
   }
 
-  checkTitle(title){
+  checkTitle(updatedBook){
     let fetchedBooks = _.map(this.props.books)
 
-    console.log(fetchedBooks);
-    //   for (var key in bookTitles) {
-    //     if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
-    //       // return onError()
-    //       console.log('title exists');
-    //     }
-    //   }
+    for (var value of fetchedBooks) {
+      if (updatedBook.title === value.title && updatedBook.id!==value.id){
+        console.log('title already exists')
+      }
+    }
 
   }
 

@@ -10,8 +10,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class ImageContent extends Component {
   componentWillMount () {
-    console.log('this.props in ImageContent', this.props)
-    console.log('this.props.checkTitle in ImageContent', this.props.checkTitle())
     let {initialize, title, content, author, published } = this.props;
     initialize({ title, content, author, published});
   }
@@ -32,8 +30,9 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    let {saveBook, id, img, modal: { close }} = this.props;
-
+    console.log('values in onSubmit function in ImageContent: ',values)
+    let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
+    checkTitle(values);
     saveBook({...values, id, img}, 
             () => close());
   }
