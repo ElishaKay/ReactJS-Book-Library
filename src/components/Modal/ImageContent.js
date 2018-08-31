@@ -10,8 +10,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class ImageContent extends Component {
   componentWillMount () {
-    let {initialize, title, content, author, published } = this.props;
-    initialize({ title, content, author, published});
+    let {initialize, title, content, author, published, id } = this.props;
+    initialize({ title, content, author, published, id});
   }
 
   renderField(field) {
@@ -29,21 +29,27 @@ class ImageContent extends Component {
     );
   }
 
-  onSubmit(values) {
-    let {saveBook, id, img, modal: { close }} = this.props;
-    saveBook({...values, id, img}, 
-            () => close(),
-            () => 
-              confirmAlert({
-                title: 'Title already exists',
-                message: 'Please choose a different title.',
-                buttons: [
-                  {
-                    label: 'Ok',
-                  }
-                ]
-              })
-    );
+  onSubmit = async values => {
+    let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
+    try{
+      let res = await checkTitle(values);
+      if (res.exists) {
+        confirmAlert({
+                  title: 'Title already exists',
+                  message: 'Please choose a different title.',
+                  buttons: [
+                    {
+                      label: 'Ok',
+                    }
+                  ]
+        })
+      } else {
+        saveBook({...values, id, img})
+        return close()
+      }
+    } catch(e) {
+        console.log(e)
+    }
   }
 
   onDeleteClick() {
