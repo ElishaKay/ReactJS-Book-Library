@@ -27,12 +27,11 @@ export const fetchBooks = () => async dispatch => {
   dispatch({ type: FETCH_BOOKS, payload: books });
 }
 
-export const saveBook = (values, onSuccess) => dispatch => {
+export const saveBook = (values) => dispatch => {
   values.img = values.img.includes("575c56519f72666e381d4efd") ? 'http://sybasigns.com.au/images/products-large/new-books-book-stickers.jpg' : values.img
   values.title = filterTitle(values.title);
 
   dispatch({ type: SAVE_BOOK, payload: values });
-  onSuccess();
 }
 
 export const deleteBook = id => dispatch => {

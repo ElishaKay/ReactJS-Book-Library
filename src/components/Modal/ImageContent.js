@@ -29,22 +29,24 @@ class ImageContent extends Component {
     );
   }
 
-  onSubmit(values) {
+  onSubmit = async values => {
     let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
-    checkTitle(values)
-      .then(() => 
-        saveBook({...values, id, img}, 
-            () => close())
-      )
-      .catch(err =>  confirmAlert({
-                title: err,
+    let res = await checkTitle(values);
+    console.log('res in ImageContent:',res);
+    if (res.exists) {
+      confirmAlert({
+                title: 'Title already exists',
                 message: 'Please choose a different title.',
                 buttons: [
                   {
                     label: 'Ok',
                   }
                 ]
-      }))
+      })
+    } else {
+      saveBook({...values, id, img})
+      return close()
+    }
   }
 
   onDeleteClick() {

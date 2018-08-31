@@ -19,10 +19,11 @@ class BooksIndex extends Component {
     return new Promise((resolve, reject) => {
       for (var value of fetchedBooks) {
         if (updatedBook.title === value.title && updatedBook.id!==value.id){
-           reject('Title already exists')
+           return resolve({exists: true})
         }
       }
-    resolve();  
+    console.log('should resolve')
+    resolve({exists: false});  
     })
   }
 
