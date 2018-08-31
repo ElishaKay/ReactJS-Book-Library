@@ -6,6 +6,8 @@ import { fetchBooks } from "../../actions";
 import ImageModal from '../Modal/ImageModal'
 import Layout from '../Modal/Layout'
 
+import newBook from '../../constants/newBook'
+
 
 class BooksIndex extends Component {
   componentDidMount() {
@@ -13,7 +15,7 @@ class BooksIndex extends Component {
   }
 
   checkTitle(title){
-    let fetchedBooks = this.props.books
+    let fetchedBooks = _.map(this.props.books)
 
     console.log(fetchedBooks);
     //   for (var key in bookTitles) {
@@ -30,6 +32,16 @@ class BooksIndex extends Component {
 
     return (
       <div>
+        <div className="row">
+        <div className="col-md-4">
+        </div>
+        <div className="col-md-4">
+          <ImageModal {...newBook} id={fetchedBooks.length} checkTitle={this.checkTitle.bind(this)}/>
+        </div>
+        <div className="col-md-4">
+        </div>
+    </div>
+
         <Layout length={fetchedBooks.length}>
           <div className='grid'>
             {fetchedBooks.map((image,i) => <ImageModal key={i} {...image} checkTitle={this.checkTitle.bind(this)} />)}            
