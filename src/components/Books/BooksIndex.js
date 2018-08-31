@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBooks } from "../../actions";
 
-import ImageModalList from '../Modal/ImageModalList'
+import ImageModal from '../Modal/ImageModal'
 import Layout from '../Modal/Layout'
 
 
@@ -12,14 +12,26 @@ class BooksIndex extends Component {
     this.props.fetchBooks();
   }
 
+  checkTitle(){
+    let fetchedBooks = this.props.books
+
+    console.log(fetchedBooks);
+    // for (var key in bookTitles) {
+    //   if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
+    //     return onError()
+    //   }
+    // }
+
+  }
+
   render() {
-    let fetchedBooks = _.map(this.props.books)
+    let fetchedBooks = _.map(this.props.books).reverse()
 
     return (
       <div>
         <Layout length={fetchedBooks.length}>
           <div className='grid'>
-            <ImageModalList images={fetchedBooks.reverse()}/>
+            {fetchedBooks.map((image,i) => <ImageModal key={i} {...image} checkTitle={this.checkTitle.bind(this)} />)}            
           </div>
         </Layout>
       </div>

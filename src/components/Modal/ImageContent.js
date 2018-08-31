@@ -10,6 +10,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class ImageContent extends Component {
   componentWillMount () {
+    console.log('this.props in ImageContent', this.props)
     let {initialize, title, content, author, published } = this.props;
     initialize({ title, content, author, published});
   }
