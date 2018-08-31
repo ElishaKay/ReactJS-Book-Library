@@ -12,15 +12,16 @@ class BooksIndex extends Component {
     this.props.fetchBooks();
   }
 
-  checkTitle(){
+  checkTitle(title){
     let fetchedBooks = this.props.books
 
     console.log(fetchedBooks);
-    // for (var key in bookTitles) {
-    //   if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
-    //     return onError()
+    //   for (var key in bookTitles) {
+    //     if (values.title === bookTitles[key].title && values.id!==bookTitles[key].id){
+    //       // return onError()
+    //       console.log('title exists');
+    //     }
     //   }
-    // }
 
   }
 
