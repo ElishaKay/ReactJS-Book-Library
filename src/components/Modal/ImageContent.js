@@ -10,8 +10,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
 class ImageContent extends Component {
   componentWillMount () {
-    let {initialize, title, content, author, published } = this.props;
-    initialize({ title, content, author, published});
+    let {initialize, title, content, author, published, id } = this.props;
+    initialize({ title, content, author, published, id});
   }
 
   renderField(field) {
@@ -30,11 +30,21 @@ class ImageContent extends Component {
   }
 
   onSubmit(values) {
-    console.log('values in onSubmit function in ImageContent: ',values)
     let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
-    checkTitle(values);
-    saveBook({...values, id, img}, 
-            () => close());
+    checkTitle(values)
+      .then(() => 
+        saveBook({...values, id, img}, 
+            () => close())
+      )
+      .catch(err =>  confirmAlert({
+                title: err,
+                message: 'Please choose a different title.',
+                buttons: [
+                  {
+                    label: 'Ok',
+                  }
+                ]
+      }))
   }
 
   onDeleteClick() {
