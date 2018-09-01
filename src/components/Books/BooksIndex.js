@@ -16,14 +16,12 @@ class BooksIndex extends Component {
 
   checkTitle(updatedBook){
     let fetchedBooks = _.map(this.props.books)
-    return new Promise((resolve, reject) => {
       for (var value of fetchedBooks) {
         if (updatedBook.title === value.title && updatedBook.id!==value.id){
-           return resolve({exists: true})
+           return {exists: true}
         }
       }
-    resolve({exists: false});  
-    })
+    return {exists: false}  
   }
 
   render() {
