@@ -31,26 +31,26 @@ class ImageContent extends Component {
 
   onSubmit = async values => {
     let {checkTitle, saveBook, id, img, modal: { close }} = this.props;
-    try{
+    try {
       let res = await checkTitle(values);
       if (res.exists) {
-        confirmAlert({
-                  title: 'Title already exists',
-                  message: 'Please choose a different title.',
-                  buttons: [
-                    {
-                      label: 'Ok',
-                    }
-                  ]
-        })
+          confirmAlert({
+                    title: 'Title already exists',
+                    message: 'Please choose a different title.',
+                    buttons: [
+                      {
+                        label: 'Ok',
+                      }
+                    ]
+          })
       } else {
-        saveBook({...values, id, img})
-        return close()
+          saveBook({...values, id, img})
+          return close()
       }
     } catch(e) {
         console.log(e)
     }
-  }
+  } 
 
   onDeleteClick() {
     let {deleteBook, id, modal: { close }} = this.props;
@@ -99,6 +99,7 @@ class ImageContent extends Component {
           label="Published"
           name="published"
           component={renderDatePicker}
+          format={(value, name) => value === '' ? null : value}
         />
 
         <button type="submit" className="btn btn-primary mt-md-3">Save</button>      
