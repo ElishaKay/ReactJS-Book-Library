@@ -11,7 +11,6 @@ const middleware = [thunk];
 let store = {}
 
 if (process.env.NODE_ENV === 'production') {
-  // we are in production - return the prod set of keys
   store = createStore(reducers,
 		{},
 		compose(
@@ -27,7 +26,6 @@ if (process.env.NODE_ENV === 'production') {
 	  )
 	);
 }
-
 
 ReactDOM.render(
   <Provider store={store}><App /></Provider>,
