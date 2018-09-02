@@ -27,7 +27,15 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 <h4>Deploying to Heroku</h4>
 
 
-- You can only deploy to Heroku from the master branch. 
+- You can only deploy to Heroku from the master branch. \
+- The 'app.js' file in the root directory is the express server. It only serves the 'build' folder with this line:
+
+```javascript
+app.use(express.static(path.join(__dirname, 'build')));
+```
+
+
+- Here are the commands for deployment:
 
 ```
 git checkout master
