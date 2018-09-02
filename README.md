@@ -24,6 +24,19 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 ```
 
 
+<h4>Deploying to Heroku</h4>
+
+
+- You can only deploy to Heroku from the master branch. 
+
+```
+git checkout master
+git merge latest-branch
+npm run build
+git push heroku master
+```
+
+
 <h4>The 3 Important Redux Store Methods</h4>
 
 A redux store has 3 important methods on it:
