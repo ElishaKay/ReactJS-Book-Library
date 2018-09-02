@@ -46,20 +46,31 @@ git merge latest-branch
 git push heroku master
 ```
 
-Important: The repo includes the <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en">Redux Dev Tools Chrome Extension</a> for Development purposes.
+The repo includes the <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en">Redux Dev Tools Chrome Extension</a> for Development purposes.
 
 If Redux Dev Tools is included in the deployed version, the app won't work for users that don't have the extension installed on their computer!
 
-Therefore, before deploying, within the file <a href="src/index.js">src/index.js</a> comment out the line that enables redux dev tools:
+Therefore, within the <a href="src/index.js">src/index.js</a> we check the NODE_ENV variable - (which is set to 'production' when deployed to heroku)
 
 ```javascript
-const store = createStore(reducers,
-  {},
-  compose(
-    applyMiddleware(...middleware)
-    // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+let store = {}
+
+if (process.env.NODE_ENV === 'production') {
+  store = createStore(reducers,
+    {},
+    compose(
+      applyMiddleware(...middleware)
+    )
+  );
+} else {
+  store = createStore(reducers,
+    {},
+    compose(
+      applyMiddleware(...middleware)
+      , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+  );
+}
 ```
 
 
