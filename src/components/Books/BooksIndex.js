@@ -26,14 +26,12 @@ class BooksIndex extends Component {
 
   render() {
     let { books } = this.props;
-    console.log('books in BooksIndex', books)
     let maxKey=0;
     for (var key in books){
       if(parseInt(key)>maxKey){
         maxKey = parseInt(key);
       }
     }
-    console.log('maxKey: ',maxKey);
     books = _.map(books).reverse()
 
     return (
