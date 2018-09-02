@@ -26,10 +26,15 @@ class BooksIndex extends Component {
 
   render() {
     let { books } = this.props;
-    var maxKey = parseInt(_.max(Object.keys(books), function (o) { return books[o]; }));
-
+    console.log('books in BooksIndex', books)
+    let maxKey=0;
+    for (var key in books){
+      if(parseInt(key)>maxKey){
+        maxKey = parseInt(key);
+      }
+    }
     console.log('maxKey: ',maxKey);
-    let fetchedBooks = _.map(this.props.books).reverse()
+    books = _.map(books).reverse()
 
     return (
       <div>
@@ -43,9 +48,9 @@ class BooksIndex extends Component {
         </div>
     </div>
 
-        <Layout length={fetchedBooks.length}>
+        <Layout length={books.length}>
           <div className='grid'>
-            {fetchedBooks.map((image,i) => <ImageModal key={i} {...image} checkTitle={this.checkTitle.bind(this)} />)}            
+            {books.map((image,i) => <ImageModal key={i} {...image} checkTitle={this.checkTitle.bind(this)} />)}            
           </div>
         </Layout>
       </div>
