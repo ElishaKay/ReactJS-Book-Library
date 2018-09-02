@@ -25,6 +25,10 @@ class BooksIndex extends Component {
   }
 
   render() {
+    let { books } = this.props;
+    var maxKey = parseInt(_.max(Object.keys(books), function (o) { return books[o]; }));
+
+    console.log('maxKey: ',maxKey);
     let fetchedBooks = _.map(this.props.books).reverse()
 
     return (
@@ -33,7 +37,7 @@ class BooksIndex extends Component {
         <div className="col-md-4">
         </div>
         <div className="col-md-4">
-          <ImageModal {...newBook} id={fetchedBooks.length} checkTitle={this.checkTitle.bind(this)}/>
+          <ImageModal {...newBook} id={maxKey+1} checkTitle={this.checkTitle.bind(this)}/>
         </div>
         <div className="col-md-4">
         </div>
