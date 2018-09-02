@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _,{radix} from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBooks } from "../../actions";
@@ -28,8 +28,8 @@ class BooksIndex extends Component {
     let { books } = this.props;
     let maxKey=0;
     for (var key in books){
-      if(parseInt(key)>maxKey){
-        maxKey = parseInt(key);
+      if(parseInt(key, radix)>maxKey){
+        maxKey = parseInt(key, radix);
       }
     }
     books = _.map(books).reverse()
