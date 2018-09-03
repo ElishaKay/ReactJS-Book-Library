@@ -4,6 +4,8 @@
  - *Redux*
  - *Redux-Form*
  - *CRUD Operations*
+ - *Form Validation*
+ - *Responsive Design for Desktop/Mobile/Tablet*
  - *React-DatePicker*
  - *Google-Books API*
  - *Using <a href="https://codepen.io/ivanodintsov/pen/yqvZzO">React Modal Animation Library</a> by Ivan Odintsov.*
@@ -64,7 +66,7 @@ if (process.env.NODE_ENV === 'production') {
   store = createStore(reducers,
     {},
     compose(
-      applyMiddleware(...middleware), 
+      applyMiddleware(...middleware),
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
