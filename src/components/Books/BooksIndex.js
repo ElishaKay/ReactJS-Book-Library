@@ -35,16 +35,9 @@ class BooksIndex extends Component {
 
     return (
       <div>
-        <div className="row">
-        <div className="col-md-4">
-        </div>
-        <div className="col-md-4">
+        <div className="create-new-book">
           <ImageModal {...newBook} id={maxKey+1} checkTitle={this.checkTitle.bind(this)}/>
         </div>
-        <div className="col-md-4">
-        </div>
-    </div>
-
         <Layout length={books.length}>
           <div className='grid'>
             {books.map((image,i) => <ImageModal key={i} {...image} checkTitle={this.checkTitle.bind(this)} />)}            

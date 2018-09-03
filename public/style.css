@@ -231,3 +231,8 @@ span{
      display: none;
   }
 }
+
+.create-new-book {
+   max-width:450px; 
+   margin: auto;
+}
