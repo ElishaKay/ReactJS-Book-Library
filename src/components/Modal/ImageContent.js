@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { saveBook, deleteBook  } from "../../actions";
-import bookFormFields from '../../constants/bookFormFields'
-import renderDatePicker from '../Forms/renderDatePicker'
+import bookFormFields from '../../helpers/bookFormFields'
+import renderDatePicker from '../../helpers/renderDatePicker'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 

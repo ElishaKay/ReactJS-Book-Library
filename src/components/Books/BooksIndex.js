@@ -1,4 +1,4 @@
-import _,{radix} from "lodash";
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBooks } from "../../actions";
@@ -6,7 +6,7 @@ import { fetchBooks } from "../../actions";
 import ImageModal from '../Modal/ImageModal'
 import Layout from '../Modal/Layout'
 
-import newBook from '../../constants/newBook'
+import newBook from '../../helpers/newBook'
 
 
 class BooksIndex extends Component {
@@ -26,13 +26,12 @@ class BooksIndex extends Component {
 
   render() {
     let { books } = this.props;
-    let maxKey=0;
-    for (var key in books){
-      if(parseInt(key, radix)>maxKey){
-        maxKey = parseInt(key, radix);
-      }
-    }
     books = _.map(books).reverse()
+    let lastElem = books[0]
+    var maxKey;
+    if (lastElem){
+      maxKey = lastElem.id 
+    }
 
     return (
       <div>
