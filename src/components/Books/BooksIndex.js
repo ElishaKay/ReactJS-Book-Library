@@ -6,7 +6,7 @@ import { fetchBooks } from "../../actions";
 import ImageModal from '../Modal/ImageModal'
 import Layout from '../Modal/Layout'
 
-import newBook from '../../constants/newBook'
+import newBook from '../../helpers/newBook'
 
 
 class BooksIndex extends Component {
