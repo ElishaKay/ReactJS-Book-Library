@@ -28,7 +28,7 @@ class BooksIndex extends Component {
     let { books } = this.props;
     books = _.map(books).reverse()
     let lastElem = books[0]
-    var maxKey;
+    let maxKey;
     if (lastElem){
       maxKey = lastElem.id 
     }
