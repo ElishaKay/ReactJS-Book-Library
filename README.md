@@ -25,6 +25,7 @@ axios.get('https://www.googleapis.com/books/v1/volumes?q=harry')
 });
 ```
 
+Includes: CRUD Operations with React, Redux and the Google Books API
 
 <h4>Deploying to Heroku</h4>
 
